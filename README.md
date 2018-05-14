@@ -1,2 +1,0 @@
-# SmartApe
-Jenkins test
