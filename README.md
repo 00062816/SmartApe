@@ -1,2 +1,2 @@
 # SmartApe
-Project in development
+Project in development. Jenkins test 
