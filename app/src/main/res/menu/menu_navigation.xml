@@ -3,30 +3,55 @@
 
     <group android:checkableBehavior="single">
 
-        <item android:id="@+id/menu_profile_item"
-            android:title="@string/text_profile_item"/>
+        <item
+            android:id="@+id/menu_blank_item"
+            android:title="">
 
-        <item android:id="@+id/menu_groups_item"
-            android:title="@string/text_groups_item"/>
+            <menu>
 
-        <item android:id="@+id/menu_saved_item"
-            android:title="@string/text_saved_item"/>
+            </menu>
 
-        <item android:id="@+id/menu_myquizzes_item"
-            android:title="@string/text_my_quizzes_item"/>
+        </item>
 
-        <item android:id="@+id/menu_others_item"
-            android:title="@string/text_others_item">
+        <item
+            android:id="@+id/menu_profile_item"
+            android:title="@string/text_profile_item"
+            android:icon="@drawable/ic_person_light_gray_32dp"/>
+
+        <item
+            android:id="@+id/menu_groups_item"
+            android:title="@string/text_groups_item"
+            android:icon="@drawable/ic_people_light_gray_32dp"/>
+
+        <item
+            android:id="@+id/menu_saved_item"
+            android:title="@string/text_saved_item"
+            android:icon="@drawable/ic_bookmark_light_gray_32dp"/>
+
+        <item
+            android:id="@+id/menu_myquizzes_item"
+            android:title="@string/text_my_quizzes_item"
+            android:icon="@drawable/ic_assignment_light_gray_32dp"/>
+
+        <item android:id="@+id/menu_notifications_item"
+            android:title="@string/text_notifications_item"
+            android:icon="@drawable/ic_notifications_active_light_gray_32dp"/>
+
+        <item
+            android:id="@+id/menu_others_item"
+            android:title="">
 
             <menu>
 
                 <group android:checkableBehavior="single">
 
-                    <item android:id="@+id/submenu_settings_item"
-                        android:title="@string/text_settings_item"/>
+                    <item
+                        android:id="@+id/submenu_settings_item"
+                        android:title="@string/text_settings_item" />
 
-                    <item android:id="@+id/submenu_donate_item"
-                        android:title="@string/text_donate_item"/>
+                    <item
+                        android:id="@+id/submenu_donate_item"
+                        android:title="@string/text_donate_item" />
 
                 </group>
 

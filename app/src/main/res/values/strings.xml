@@ -16,4 +16,5 @@
     <string name="text_others_item">Others</string>
     <string name="text_settings_item">Settings</string>
     <string name="text_donate_item">Donate</string>
+    <string name="text_notifications_item">Notifications</string>
 </resources>
