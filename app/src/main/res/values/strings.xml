@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SmartApe</string>
+    <string name="text_app_s_logo">App\'s Logo</string>
+    <string name="text_or">OR</string>
+    <string name="text_hint_username">Username</string>
+    <string name="text_hint_password">Password</string>
+    <string name="text_need_an_account">Don\'t have an account? <u>Sign in</u> </string>
+    <string name="text_don_t_have_an_account">Don\'t have an account?</string>
+    <string name="text_sign_in">Sign in</string>
+    <string name="text_log_in">LOG IN</string>
+    <string name="text_app_s_title">App\'s title</string>
 </resources>
