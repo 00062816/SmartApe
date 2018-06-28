@@ -9,4 +9,11 @@
     <string name="text_sign_in">Sign in</string>
     <string name="text_log_in">LOG IN</string>
     <string name="text_app_s_title">App\'s title</string>
+    <string name="text_profile_item">Profile</string>
+    <string name="text_groups_item">Groups</string>
+    <string name="text_saved_item">Saved</string>
+    <string name="text_my_quizzes_item">My Quizzes</string>
+    <string name="text_others_item">Others</string>
+    <string name="text_settings_item">Settings</string>
+    <string name="text_donate_item">Donate</string>
 </resources>

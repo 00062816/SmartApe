@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/menu_profile_item"
+            android:title="@string/text_profile_item"/>
+
+        <item android:id="@+id/menu_groups_item"
+            android:title="@string/text_groups_item"/>
+
+        <item android:id="@+id/menu_saved_item"
+            android:title="@string/text_saved_item"/>
+
+        <item android:id="@+id/menu_myquizzes_item"
+            android:title="@string/text_my_quizzes_item"/>
+
+        <item android:id="@+id/menu_others_item"
+            android:title="@string/text_others_item">
+
+            <menu>
+
+                <group android:checkableBehavior="single">
+
+                    <item android:id="@+id/submenu_settings_item"
+                        android:title="@string/text_settings_item"/>
+
+                    <item android:id="@+id/submenu_donate_item"
+                        android:title="@string/text_donate_item"/>
+
+                </group>
+
+            </menu>
+
+        </item>
+
+    </group>
+
+</menu>
