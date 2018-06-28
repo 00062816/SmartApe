@@ -7,6 +7,8 @@
     <color name="colorAccent">#FFC107</color>
     <color name="colorAccentDark">#c79100</color>
     <color name="colorAccentLight">#fff350</color>
+    <color name="colorAccentVeryLight">#ffffb6</color>
+    <color name="colorAccentUltraLight">#ffffe9</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecundaryText">#757575</color>
     <color name="colorDivider">#BDBDBD</color>
