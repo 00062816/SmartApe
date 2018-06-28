@@ -13,8 +13,12 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:layout_gravity="start"
-        app:headerLayout=""
-        app:menu="">
+        app:headerLayout="@layout/header_navigation"
+        app:menu="@menu/menu_navigation"
+        android:background="@color/colorPrimary"
+        app:itemTextColor="@android:color/white"
+        app:itemTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Title"
+        app:itemIconTint="@color/colorLightGray">
 
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>
