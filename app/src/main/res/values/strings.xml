@@ -17,4 +17,11 @@
     <string name="text_settings_item">Settings</string>
     <string name="text_donate_item">Donate</string>
     <string name="text_notifications_item">Notifications</string>
+    <string name="text_favorite_quiz">Favorite quiz</string>
+    <string name="text_quiz_picture">Quiz picture</string>
+    <string name="text_created_by">Created by:</string>
+    <string name="text_user_picture">User picture</string>
+    <string name="text_divisor">|</string>
+    <string name="text_mark_quiz_as_saved">Mark quiz as saved</string>
+    <string name="text_mark_quiz_as_favorite">Mark quiz as favorite</string>
 </resources>
