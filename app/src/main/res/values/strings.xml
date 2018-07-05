@@ -25,4 +25,11 @@
     <string name="text_mark_quiz_as_saved">Mark quiz as saved</string>
     <string name="text_mark_quiz_as_favorite">Mark quiz as favorite</string>
     <string name="text_favorite">Favorite</string>
+    <string name="text_top_this">Top this</string>
+
+    <string-array name="trending_options">
+        <item>Month</item>
+        <item>Week</item>
+        <item>Today</item>
+    </string-array>
 </resources>
