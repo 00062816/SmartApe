@@ -24,4 +24,5 @@
     <string name="text_divisor">|</string>
     <string name="text_mark_quiz_as_saved">Mark quiz as saved</string>
     <string name="text_mark_quiz_as_favorite">Mark quiz as favorite</string>
+    <string name="text_favorite">Favorite</string>
 </resources>
