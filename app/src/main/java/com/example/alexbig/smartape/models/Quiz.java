@@ -9,6 +9,8 @@ public class Quiz {
     private String description;
     private String timeLimit;
     private int numQuestions;
+    private boolean favorite;
+    private boolean saved;
 
     public Quiz(){
 
@@ -68,5 +70,21 @@ public class Quiz {
 
     public void setNumQuestions(int numQuestions) {
         this.numQuestions = numQuestions;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
+    public boolean isSaved() {
+        return saved;
+    }
+
+    public void setSaved(boolean saved) {
+        this.saved = saved;
     }
 }

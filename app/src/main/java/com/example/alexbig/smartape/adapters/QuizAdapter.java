@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,9 +41,33 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull QuizAdapter.QuizViewHolder holder, int position) {
-        Quiz quiz = quizList.get(position);
+        final Quiz quiz = quizList.get(position);
         holder.titleTextView.setText(quiz.getTitle());
         holder.descriptionTextView.setText(quiz.getDescription());
+
+        final CheckBox favoriteButton = holder.favoriteButton;
+        favoriteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if (favoriteButton.isChecked()){
+                    quiz.setFavorite(false);
+                }else{
+                    quiz.setFavorite(true);
+                }
+            }
+        });
+
+        final CheckBox saveButton = holder.saveButton;
+        saveButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if (saveButton.isChecked()){
+                    quiz.setSaved(false);
+                }else{
+                    quiz.setSaved(true);
+                }
+            }
+        });
     }
 
     @Override
@@ -59,8 +83,8 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         private TextView dateTextView;
         private TextView titleTextView;
         private TextView descriptionTextView;
-        private ImageButton saveButton;
-        private ImageButton favoriteButton;
+        private CheckBox saveButton;
+        private CheckBox favoriteButton;
 
         public QuizViewHolder(View itemView) {
             super(itemView);

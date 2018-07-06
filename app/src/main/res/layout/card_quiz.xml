@@ -100,29 +100,29 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/relativeLayout_recycler_quizSection">
 
-            <ImageButton
+            <CheckBox
                 android:id="@+id/imageButton_recycler_quizSaved"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/checkbox_size"
+                android:layout_height="@dimen/checkbox_size"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
-                android:background="@android:color/transparent"
+                android:background="@drawable/button_save"
                 android:contentDescription="@string/text_mark_quiz_as_saved"
-                android:src="@drawable/ic_not_saved_black_24dp" />
+                android:button="@null" />
 
-            <ImageButton
+            <CheckBox
                 android:id="@+id/imageButton_recycler_quizFavorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/checkbox_size"
+                android:layout_height="@dimen/checkbox_size"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
                 android:layout_toLeftOf="@id/imageButton_recycler_quizSaved"
                 android:layout_toStartOf="@id/imageButton_recycler_quizSaved"
-                android:background="@android:color/transparent"
+                android:background="@drawable/button_favorite"
                 android:contentDescription="@string/text_mark_quiz_as_favorite"
-                android:src="@drawable/ic_star_border_black_24dp" />
+                android:button="@null" />
         </RelativeLayout>
 
     </RelativeLayout>

@@ -41,9 +41,17 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(quizListFragment, getString(R.string.tab_quizzes));
         tabLayout.setupWithViewPager(viewPager);
 
-        Quiz quiz = new Quiz();
-        quiz.setTitle("Quiz 1");
-        quiz.setDescription("Quiz description");
-        quizList.add(quiz);
+        Quiz quiz1 = new Quiz();
+        quiz1.setTitle("Quiz 1");
+        quiz1.setDescription("Quiz description");
+        quizList.add(quiz1);
+        Quiz quiz2 = new Quiz();
+        quiz2.setTitle("Quiz 2");
+        quiz2.setDescription("Quiz description");
+        quizList.add(quiz2);
+        Quiz quiz3 = new Quiz();
+        quiz3.setTitle("Quiz 3");
+        quiz3.setDescription("Quiz description");
+        quizList.add(quiz3);
     }
 }
