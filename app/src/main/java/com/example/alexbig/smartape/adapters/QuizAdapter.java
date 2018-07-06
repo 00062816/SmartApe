@@ -46,25 +46,36 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         holder.descriptionTextView.setText(quiz.getDescription());
 
         final CheckBox favoriteButton = holder.favoriteButton;
+        if (quiz.isFavorite()){
+            favoriteButton.setChecked(true);
+        }else{
+            favoriteButton.setChecked(false);
+        }
         favoriteButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 if (favoriteButton.isChecked()){
-                    quiz.setFavorite(false);
-                }else{
                     quiz.setFavorite(true);
+                }else{
+                    quiz.setFavorite(false);
                 }
             }
         });
 
         final CheckBox saveButton = holder.saveButton;
+        if (quiz.isSaved()){
+            saveButton.setChecked(true);
+        }else{
+            saveButton.setChecked(false);
+        }
+
         saveButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 if (saveButton.isChecked()){
-                    quiz.setSaved(false);
-                }else{
                     quiz.setSaved(true);
+                }else{
+                    quiz.setSaved(false);
                 }
             }
         });
