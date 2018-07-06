@@ -44,6 +44,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         final Quiz quiz = quizList.get(position);
         holder.titleTextView.setText(quiz.getTitle());
         holder.descriptionTextView.setText(quiz.getDescription());
+        holder.userTextView.setText(quiz.getCreator());
 
         final CheckBox favoriteButton = holder.favoriteButton;
         if (quiz.isFavorite()){
