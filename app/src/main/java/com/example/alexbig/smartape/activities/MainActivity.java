@@ -1,8 +1,10 @@
-package com.example.alexbig.smartape;
+package com.example.alexbig.smartape.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+
+import com.example.alexbig.smartape.R;
 
 public class MainActivity extends AppCompatActivity {
 
