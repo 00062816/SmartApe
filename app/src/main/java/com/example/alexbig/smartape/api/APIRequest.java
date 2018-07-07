@@ -1,8 +1,11 @@
 package com.example.alexbig.smartape.api;
 
+import com.example.alexbig.smartape.api.deserializer.QuestionDeserializer;
 import com.example.alexbig.smartape.api.deserializer.QuizDeserializer;
 import com.example.alexbig.smartape.api.deserializer.TokenDeserializer;
+import com.example.alexbig.smartape.database.viewmodels.QuestionViewModel;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
+import com.example.alexbig.smartape.models.Question;
 import com.example.alexbig.smartape.models.Quiz;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -78,6 +81,29 @@ public class APIRequest {
             @Override
             public void onFailure(Call<List<Quiz>> call, Throwable t) {
                 t.printStackTrace();
+            }
+        });
+    }
+
+    public void downloadQuestions(List<String> questionIds){
+        for (String id:questionIds){
+            downloadQuestion(id);
+        }
+    }
+
+    public void downloadQuestion(String questionId){
+        Gson gson = new GsonBuilder().registerTypeAdapter(Question.class, new QuestionDeserializer()).create();
+        createAPIClient(gson);
+        Call<Question> getQuestion = smartApeAPI.getQuestion(questionId);
+        getQuestion.enqueue(new Callback<Question>() {
+            @Override
+            public void onResponse(Call<Question> call, retrofit2.Response<Question> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Question> call, Throwable t) {
+
             }
         });
     }

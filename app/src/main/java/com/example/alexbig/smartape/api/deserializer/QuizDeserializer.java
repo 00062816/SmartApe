@@ -1,6 +1,7 @@
 package com.example.alexbig.smartape.api.deserializer;
 
 import com.example.alexbig.smartape.models.Quiz;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -8,6 +9,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuizDeserializer implements JsonDeserializer<Quiz>{
 
@@ -15,6 +18,7 @@ public class QuizDeserializer implements JsonDeserializer<Quiz>{
     public Quiz deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         Quiz quiz = new Quiz();
         JsonObject jsonObject = json.getAsJsonObject();
+        System.out.println("JSON "+jsonObject.toString());
 
         String title = jsonObject.get("Titulo").getAsString();
         if (title != null){
@@ -56,6 +60,13 @@ public class QuizDeserializer implements JsonDeserializer<Quiz>{
         }else{
             quiz.setCategory("");
         }
+
+        List<String> questions = new ArrayList<>();
+        JsonArray array = jsonObject.getAsJsonArray("Preguntas");
+        for (int i=0; i<array.size(); i++){
+            questions.add(array.get(i).getAsString());
+        }
+        quiz.setQuestions(questions);
 
         return quiz;
     }

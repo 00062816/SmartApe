@@ -1,5 +1,7 @@
 package com.example.alexbig.smartape.models;
 
+import java.util.List;
+
 public class Quiz {
 
     private String category;
@@ -11,6 +13,7 @@ public class Quiz {
     private int numQuestions;
     private boolean favorite;
     private boolean saved;
+    private List<String> questions;
 
     public Quiz(){
 
@@ -86,5 +89,13 @@ public class Quiz {
 
     public void setSaved(boolean saved) {
         this.saved = saved;
+    }
+
+    public List<String> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<String> questions) {
+        this.questions = questions;
     }
 }

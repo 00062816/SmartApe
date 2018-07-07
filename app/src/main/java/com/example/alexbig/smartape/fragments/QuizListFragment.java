@@ -34,7 +34,7 @@ public class QuizListFragment extends Fragment{
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_main_allQuizzes);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-        quizAdapter = new QuizAdapter(container.getContext());
+        quizAdapter = new QuizAdapter(container.getContext(), apiRequest);
         recyclerView.setAdapter(quizAdapter);
         recyclerView.setHasFixedSize(true);
 
