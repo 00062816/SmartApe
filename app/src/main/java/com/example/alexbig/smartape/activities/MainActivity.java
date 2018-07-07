@@ -1,6 +1,9 @@
 package com.example.alexbig.smartape.activities;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -9,12 +12,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.adapters.ViewPagerAdapter;
+import com.example.alexbig.smartape.api.APIRequest;
+import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.fragments.QuizListFragment;
 import com.example.alexbig.smartape.models.Quiz;
 
@@ -38,6 +42,16 @@ public class MainActivity extends AppCompatActivity {
 
         setTabs();
         setDrawer();
+
+        QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        APIRequest apiRequest = new APIRequest(quizViewModel);
+        apiRequest.downloadQuizzes();
+        quizViewModel.getQuizzes().observe(this, new Observer<List<Quiz>>() {
+            @Override
+            public void onChanged(@Nullable List<Quiz> quizzes) {
+                fullList = quizzes;
+            }
+        });
     }
 
     private void setTabs() {
@@ -52,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(quizListFragment, getString(R.string.tab_quizzes));
         tabLayout.setupWithViewPager(viewPager);
 
-        Quiz quiz1 = new Quiz();
+        /*Quiz quiz1 = new Quiz();
         quiz1.setTitle("Quiz 1");
         quiz1.setDescription("Quiz description");
         quiz1.setCreator("Test");
@@ -67,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         quiz3.setDescription("Quiz description");
         quiz3.setCreator("Test");
         fullList.add(quiz3);
-        quizList.addAll(fullList);
+        quizList.addAll(fullList);*/
     }
 
     private void setDrawer() {
