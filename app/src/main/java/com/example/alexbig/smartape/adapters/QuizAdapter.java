@@ -86,7 +86,8 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-
+                System.out.println("CLICKED "+quiz.getQuestions());
+                apiRequest.downloadQuestions(quiz.getQuestions());
             }
         });
     }
