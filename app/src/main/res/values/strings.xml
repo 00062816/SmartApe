@@ -34,6 +34,7 @@
     <string name="text_quiz_description">Quiz description</string>
     <string name="text_time_limit">Time limit</string>
     <string name="text_next">NEXT</string>
+    <string name="text_quizzes_item">Quizzes</string>
 
     <string-array name="trending_options">
         <item>Month</item>
