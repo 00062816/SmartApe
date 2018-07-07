@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editText_createQuiz_quizName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edit_text"
+            android:hint="@string/text_quiz_title"
+            android:inputType="text"
+            android:maxLength="40"
+            android:maxLines="1"
+            android:lines="1"
+            android:layout_marginTop="16dp"
+            android:padding="6dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_category"
+            android:layout_marginTop="12dp"/>
+
+        <Spinner
+            android:id="@+id/spinner_createQuiz_quizCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/quiz_category_options"
+            android:layout_marginTop="2dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_description"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edit_text"
+            android:hint="@string/text_quiz_description"
+            android:inputType="text|textMultiLine"
+            android:lines="5"
+            android:maxLines="5"
+            android:fitsSystemWindows="true"
+            android:layout_marginTop="2dp"
+            android:padding="6dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_time_limit"
+            android:layout_marginTop="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="2dp">
+
+            <NumberPicker
+                android:id="@+id/numberPicker_createQuiz_hourLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_colon" />
+
+            <NumberPicker
+                android:id="@+id/numberPicker_createQuiz_minuteLimit"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_button"
+        android:text="@string/text_next"
+        android:layout_marginBottom="8dp"/>
+
+</RelativeLayout>
