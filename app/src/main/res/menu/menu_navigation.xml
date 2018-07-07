@@ -24,6 +24,10 @@
             android:icon="@drawable/ic_people_light_gray_32dp"/>
 
         <item
+            android:id="@+id/menu_quizzes_item"
+            android:title="@string/text_quizzes_item"/>
+
+        <item
             android:id="@+id/menu_saved_item"
             android:title="@string/text_saved_item"
             android:icon="@drawable/ic_bookmark_light_gray_32dp"/>
