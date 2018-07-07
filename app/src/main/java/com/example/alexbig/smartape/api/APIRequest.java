@@ -33,7 +33,7 @@ public class APIRequest {
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request().newBuilder().addHeader("x-access-token", token).build();
+                Request request = chain.request().newBuilder().addHeader("x-access-token", ""+token).build();
                 return chain.proceed(request);
             }
         }).build();
@@ -51,6 +51,7 @@ public class APIRequest {
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                 token = response.body();
                 downloadQuizzes();
+                System.out.println("LOGIN "+token);
             }
 
             @Override
@@ -68,11 +69,10 @@ public class APIRequest {
             @Override
             public void onResponse(Call<List<Quiz>> call, retrofit2.Response<List<Quiz>> response) {
                 List<Quiz> quizList = response.body();
-                System.out.println("TOKEN "+token);
-                System.out.println("QUIZ LIST "+quizList);
                 if (quizList != null) {
                     quizViewModel.insertQuizzes(quizList);
                 }
+                System.out.println("QUIZZES DOWNLOADED "+quizList);
             }
 
             @Override
@@ -80,5 +80,9 @@ public class APIRequest {
                 t.printStackTrace();
             }
         });
+    }
+
+    public void refresh(){
+       login("uca@edu.sv","chaleco234");
     }
 }

@@ -1,6 +1,9 @@
 package com.example.alexbig.smartape.fragments;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,13 +13,19 @@ import android.view.ViewGroup;
 
 import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.adapters.QuizAdapter;
+import com.example.alexbig.smartape.api.APIRequest;
+import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.models.Quiz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuizListFragment extends Fragment{
 
     private QuizAdapter quizAdapter;
+    private APIRequest apiRequest;
+    private QuizViewModel quizViewModel;
+    private List<Quiz> quizList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -29,10 +38,57 @@ public class QuizListFragment extends Fragment{
         recyclerView.setAdapter(quizAdapter);
         recyclerView.setHasFixedSize(true);
 
+        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        quizViewModel.getQuizzes().observe(this, new Observer<List<Quiz>>() {
+             @Override
+             public void onChanged(@Nullable List<Quiz> quizzes) {
+                 quizList = quizzes;
+                 setQuizList(quizList);
+             }
+         });
+
         return view;
     }
 
-    public void setQuizList(List<Quiz> quizList){
+    public void setApiRequest(APIRequest apiRequest){
+        this.apiRequest = apiRequest;
+    }
+
+    private void setQuizList(List<Quiz> quizList){
         quizAdapter.setQuizList(quizList);
+    }
+
+    public void sortAll(){
+        setQuizList(quizList);
+    }
+
+    public void sortFavorites(){
+        List<Quiz> newList = new ArrayList<>();
+        for (Quiz q : quizList) {
+            if (q.isFavorite()) {
+                newList.add(q);
+            }
+        }
+        setQuizList(newList);
+    }
+
+    public void sortSaved(){
+        List<Quiz> newList = new ArrayList<>();
+        for (Quiz q : quizList) {
+            if (q.isSaved()) {
+                newList.add(q);
+            }
+        }
+        setQuizList(newList);
+    }
+
+    public void sortMyQuizzes(){
+        List<Quiz> newList = new ArrayList<>();
+        for (Quiz q : quizList) {
+            if (q.getCreator().equals("USER")) {
+                newList.add(q);
+            }
+        }
+        setQuizList(newList);
     }
 }

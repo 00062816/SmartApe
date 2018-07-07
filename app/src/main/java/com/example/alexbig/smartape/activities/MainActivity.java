@@ -1,9 +1,7 @@
 package com.example.alexbig.smartape.activities;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -31,33 +29,26 @@ public class MainActivity extends AppCompatActivity {
     private QuizListFragment quizListFragment;
     private ViewPagerAdapter viewPagerAdapter;
     private FloatingActionButton addFAB;
-
-    public static List<Quiz> quizList = new ArrayList<>();
-    public static List<Quiz> fullList = new ArrayList<>();
+    private APIRequest apiRequest;
+    private QuizViewModel quizViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        APIRequest apiRequest = new APIRequest(quizViewModel);
+        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        apiRequest = new APIRequest(quizViewModel);
         apiRequest.login("uca@edu.sv","chaleco234");
 
         setTabs();
         setDrawer();
-
-        quizViewModel.getQuizzes().observe(this, new Observer<List<Quiz>>() {
-            @Override
-            public void onChanged(@Nullable List<Quiz> quizzes) {
-                fullList = quizzes;
-            }
-        });
     }
 
     private void setTabs() {
         fragmentManager = getSupportFragmentManager();
         quizListFragment = new QuizListFragment();
+        quizListFragment.setApiRequest(apiRequest);
 
         addFAB = findViewById(R.id.addFAB);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
@@ -66,23 +57,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         viewPagerAdapter.addFragment(quizListFragment, getString(R.string.tab_quizzes));
         tabLayout.setupWithViewPager(viewPager);
-
-        /*Quiz quiz1 = new Quiz();
-        quiz1.setTitle("Quiz 1");
-        quiz1.setDescription("Quiz description");
-        quiz1.setCreator("Test");
-        fullList.add(quiz1);
-        Quiz quiz2 = new Quiz();
-        quiz2.setTitle("Quiz 2");
-        quiz2.setDescription("Quiz description");
-        quiz2.setCreator("Test");
-        fullList.add(quiz2);
-        Quiz quiz3 = new Quiz();
-        quiz3.setTitle("Quiz 3");
-        quiz3.setDescription("Quiz description");
-        quiz3.setCreator("Test");
-        fullList.add(quiz3);
-        quizList.addAll(fullList);*/
     }
 
     private void setDrawer() {
@@ -122,9 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        quizList.clear();
-        quizList.addAll(fullList);
-        viewPagerAdapter.notifyDataSetChanged();
+        quizListFragment.sortAll();
     }
 
     private void openFavorites() {
@@ -135,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        sortFavorites();
+        quizListFragment.sortFavorites();
     }
 
     private void openSaved() {
@@ -146,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        sortSaved();
+        quizListFragment.sortSaved();
     }
 
     private void openMyQuizzes() {
@@ -158,39 +130,13 @@ public class MainActivity extends AppCompatActivity {
                 quiz.setTitle("New Quiz");
                 quiz.setDescription("Quiz description");
                 quiz.setCreator("USER");
-                fullList.add(quiz);
+                quizViewModel.insertQuiz(quiz);
             }
         });
-        sortMyQuizzes();
+        quizListFragment.sortMyQuizzes();
     }
 
-    private void sortSaved() {
-        quizList.clear();
-        for (Quiz q : fullList) {
-            if (q.isSaved()) {
-                quizList.add(q);
-            }
-        }
-        viewPagerAdapter.notifyDataSetChanged();
-    }
-
-    private void sortFavorites() {
-        quizList.clear();
-        for (Quiz q : fullList) {
-            if (q.isFavorite()) {
-                quizList.add(q);
-            }
-        }
-        viewPagerAdapter.notifyDataSetChanged();
-    }
-
-    private void sortMyQuizzes() {
-        quizList.clear();
-        for (Quiz q : fullList) {
-            if (q.getCreator().equals("USER")) {
-                quizList.add(q);
-            }
-        }
-        viewPagerAdapter.notifyDataSetChanged();
+    private void refresh(){
+        apiRequest.refresh();
     }
 }

@@ -16,7 +16,6 @@ public class QuizDeserializer implements JsonDeserializer<Quiz>{
         Quiz quiz = new Quiz();
         JsonObject jsonObject = json.getAsJsonObject();
 
-        System.out.println(jsonObject.toString());
         String title = jsonObject.get("Titulo").getAsString();
         if (title != null){
             quiz.setTitle(title);

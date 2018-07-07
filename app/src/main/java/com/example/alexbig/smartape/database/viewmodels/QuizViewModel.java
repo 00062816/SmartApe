@@ -12,12 +12,14 @@ import java.util.List;
 
 public class QuizViewModel extends AndroidViewModel{
 
-    private MutableLiveData<List<Quiz>> quizzes = new MutableLiveData<>();
+    private static MutableLiveData<List<Quiz>> quizzes = new MutableLiveData<>();
 
     public QuizViewModel(@NonNull Application application) {
         super(application);
-        List<Quiz> quizList = new ArrayList<>();
-        quizzes.setValue(quizList);
+        if (quizzes.getValue() == null) {
+            List<Quiz> quizList = new ArrayList<>();
+            quizzes.setValue(quizList);
+        }
     }
 
     public MutableLiveData<List<Quiz>> getQuizzes() {
@@ -25,10 +27,12 @@ public class QuizViewModel extends AndroidViewModel{
     }
 
     public void insertQuiz(Quiz quiz){
-        quizzes.getValue().add(quiz);
+        List<Quiz> quizList = quizzes.getValue();
+        quizList.add(quiz);
+        quizzes.setValue(quizList);
     }
 
     public void insertQuizzes(List<Quiz> quizList){
-        quizzes.getValue().addAll(quizList);
+        quizzes.setValue(quizList);
     }
 }

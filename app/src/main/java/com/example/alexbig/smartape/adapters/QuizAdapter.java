@@ -23,7 +23,6 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     public QuizAdapter(Context context){
         this.context = context;
-        quizList = MainActivity.quizList;
     }
 
     public void setQuizList(List<Quiz> quizList){
