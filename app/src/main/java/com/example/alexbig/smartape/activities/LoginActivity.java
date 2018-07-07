@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.alexbig.smartape.R;
-import com.example.alexbig.smartape.api.SmartApesApi;
+import com.example.alexbig.smartape.api.SmartApeAPI;
 import com.example.alexbig.smartape.api.deserializers.TokenDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,11 +52,11 @@ public class LoginActivity extends AppCompatActivity {
         } else {
 
             Gson gson = new GsonBuilder().registerTypeAdapter(String.class, new TokenDeserializer()).create();
-            Retrofit.Builder builder = new Retrofit.Builder().baseUrl(SmartApesApi.ENDPOINT).addConverterFactory(GsonConverterFactory.create(gson));
+            Retrofit.Builder builder = new Retrofit.Builder().baseUrl(SmartApeAPI.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson));
             Retrofit retrofit = builder.build();
-            SmartApesApi noticiasApi = retrofit.create(SmartApesApi.class);
+            SmartApeAPI noticiasApi = retrofit.create(SmartApeAPI.class);
 
-            Call<String> stringCall = noticiasApi.token(usuario.getText().toString(), contraseña.getText().toString());
+            Call<String> stringCall = noticiasApi.login(usuario.getText().toString(), contraseña.getText().toString());
             stringCall.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
