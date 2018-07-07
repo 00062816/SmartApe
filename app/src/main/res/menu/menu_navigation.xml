@@ -24,18 +24,23 @@
             android:icon="@drawable/ic_people_light_gray_32dp"/>
 
         <item
+            android:id="@+id/menu_quizzes_item"
+            android:title="@string/text_quizzes_item"
+            android:icon="@drawable/ic_assignment_light_gray_32dp"/>
+
+        <item
             android:id="@+id/menu_saved_item"
             android:title="@string/text_saved_item"
             android:icon="@drawable/ic_bookmark_light_gray_32dp"/>
+
+        <item android:id="@+id/menu_favorite_item"
+            android:title="@string/text_favorite"
+            android:icon="@drawable/ic_star_light_gray_32dp"/>
 
         <item
             android:id="@+id/menu_myquizzes_item"
             android:title="@string/text_my_quizzes_item"
             android:icon="@drawable/ic_assignment_light_gray_32dp"/>
-
-        <item android:id="@+id/menu_notifications_item"
-            android:title="@string/text_notifications_item"
-            android:icon="@drawable/ic_notifications_active_light_gray_32dp"/>
 
         <item
             android:id="@+id/menu_others_item"
