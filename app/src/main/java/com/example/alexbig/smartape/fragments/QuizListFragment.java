@@ -29,9 +29,9 @@ public class QuizListFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.layout_all_quizzes, container, false);
+        View view = inflater.inflate(R.layout.layout_dashboard, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_main_allQuizzes);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView_dashboard_allQuizzes);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         quizAdapter = new QuizAdapter(container.getContext(), apiRequest);

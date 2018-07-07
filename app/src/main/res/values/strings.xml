@@ -25,6 +25,36 @@
     <string name="text_mark_quiz_as_saved">Mark quiz as saved</string>
     <string name="text_mark_quiz_as_favorite">Mark quiz as favorite</string>
     <string name="text_favorite">Favorite</string>
-    <string name="tab_quizzes">Quizzes</string>
+    <string name="text_top_this">Top this</string>
+    <string name="text_quiz_title">Quiz title</string>
+    <string name="text_category">Category</string>
+    <string name="text_name">Name</string>
+    <string name="text_description">Description</string>
+    <string name="text_colon">:</string>
+    <string name="text_quiz_description">Quiz description</string>
+    <string name="text_time_limit">Time limit</string>
+    <string name="text_next">NEXT</string>
     <string name="text_quizzes_item">Quizzes</string>
+    <string name="text_dashboard_item">Dashboard</string>
+    <string name="tab_quizzes">Quizzes</string>
+    <string name="text_00">00</string>
+    <string name="text_create_your_own_quiz">CREATE YOUR OWN QUIZ</string>
+
+    <string-array name="trending_options">
+        <item>Month</item>
+        <item>Week</item>
+        <item>Today</item>
+    </string-array>
+
+    <string-array name="quiz_category_options">
+        <item>Mathematics</item>
+        <item>Science</item>
+        <item>History</item>
+        <item>Language</item>
+        <item>Entertainment</item>
+        <item>Food</item>
+        <item>Sports</item>
+        <item>Technology</item>
+        <item>Miscellaneous</item>
+    </string-array>
 </resources>

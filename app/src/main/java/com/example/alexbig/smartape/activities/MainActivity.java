@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        /*quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         apiRequest = new APIRequest(quizViewModel);
-        apiRequest.login("uca@edu.sv","chaleco234");
+        apiRequest.login("uca@edu.sv","chaleco234");*/
 
         setTabs();
         setDrawer();
