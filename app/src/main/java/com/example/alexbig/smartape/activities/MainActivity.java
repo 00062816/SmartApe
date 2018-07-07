@@ -1,6 +1,7 @@
 package com.example.alexbig.smartape.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -37,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         apiRequest = new APIRequest(quizViewModel);
-        apiRequest.login("uca@edu.sv","chaleco234");*/
+        apiRequest.login("uca@edu.sv","chaleco234");
 
         setTabs();
         setDrawer();
@@ -126,11 +127,8 @@ public class MainActivity extends AppCompatActivity {
         addFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Quiz quiz = new Quiz();
-                quiz.setTitle("New Quiz");
-                quiz.setDescription("Quiz description");
-                quiz.setCreator("USER");
-                quizViewModel.insertQuiz(quiz);
+                Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
+                startActivity(intent);
             }
         });
         quizListFragment.sortMyQuizzes();

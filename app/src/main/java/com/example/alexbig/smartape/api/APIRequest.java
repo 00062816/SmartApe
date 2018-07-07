@@ -94,8 +94,7 @@ public class APIRequest {
     public void downloadQuestion(String questionId){
         Gson gson = new GsonBuilder().registerTypeAdapter(Question.class, new QuestionDeserializer()).create();
         createAPIClient(gson);
-        int id = Integer.parseInt(questionId);
-        Call<Question> getQuestion = smartApeAPI.getQuestion(id);
+        Call<Question> getQuestion = smartApeAPI.getQuestion(questionId);
         getQuestion.enqueue(new Callback<Question>() {
             @Override
             public void onResponse(Call<Question> call, retrofit2.Response<Question> response) {
