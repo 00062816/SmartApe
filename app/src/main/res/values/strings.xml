@@ -39,6 +39,10 @@
     <string name="tab_quizzes">Quizzes</string>
     <string name="text_00">00</string>
     <string name="text_create_your_own_quiz">CREATE YOUR OWN QUIZ</string>
+    <string name="text_edit_your_question">Edit your question</string>
+    <string name="text_delete_your_question">Delete your question</string>
+    <string name="text_create_quiz">CREATE QUIZ</string>
+    <string name="text_add_questions">Add questions</string>
 
     <string-array name="trending_options">
         <item>Month</item>
