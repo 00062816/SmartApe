@@ -35,6 +35,10 @@
     <string name="text_time_limit">Time limit</string>
     <string name="text_next">NEXT</string>
     <string name="text_quizzes_item">Quizzes</string>
+    <string name="text_dashboard_item">Dashboard</string>
+    <string name="tab_quizzes">Quizzes</string>
+    <string name="text_00">00</string>
+    <string name="text_create_your_own_quiz">CREATE YOUR OWN QUIZ</string>
 
     <string-array name="trending_options">
         <item>Month</item>
