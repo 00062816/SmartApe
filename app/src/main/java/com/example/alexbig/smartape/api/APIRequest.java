@@ -1,6 +1,7 @@
 package com.example.alexbig.smartape.api;
 
 import com.example.alexbig.smartape.api.deserializer.QuizDeserializer;
+import com.example.alexbig.smartape.api.deserializer.TokenDeserializer;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.models.Quiz;
 import com.google.gson.Gson;
@@ -20,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIRequest {
 
+    private static String token = "";
     private SmartApeAPI smartApeAPI;
     private QuizViewModel quizViewModel;
 
@@ -31,13 +33,31 @@ public class APIRequest {
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request().newBuilder().addHeader("Authorization", "Bearer ").build();
+                Request request = chain.request().newBuilder().addHeader("x-access-token", token).build();
                 return chain.proceed(request);
             }
         }).build();
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(SmartApeAPI.BASE_URL).client(okHttpClient).addConverterFactory(GsonConverterFactory.create(gson));
         Retrofit retrofit = builder.build();
         smartApeAPI = retrofit.create(SmartApeAPI.class);
+    }
+
+    public void login(String username, String password){
+        Gson gson = new GsonBuilder().registerTypeAdapter(String.class, new TokenDeserializer()).create();
+        createAPIClient(gson);
+        Call<String> login = smartApeAPI.login(username, password);
+        login.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                token = response.body();
+                downloadQuizzes();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     public void downloadQuizzes(){
@@ -48,6 +68,8 @@ public class APIRequest {
             @Override
             public void onResponse(Call<List<Quiz>> call, retrofit2.Response<List<Quiz>> response) {
                 List<Quiz> quizList = response.body();
+                System.out.println("TOKEN "+token);
+                System.out.println("QUIZ LIST "+quizList);
                 if (quizList != null) {
                     quizViewModel.insertQuizzes(quizList);
                 }

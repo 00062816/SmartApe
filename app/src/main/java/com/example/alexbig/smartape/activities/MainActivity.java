@@ -40,12 +40,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        APIRequest apiRequest = new APIRequest(quizViewModel);
+        apiRequest.login("uca@edu.sv","chaleco234");
+
         setTabs();
         setDrawer();
 
-        QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        APIRequest apiRequest = new APIRequest(quizViewModel);
-        apiRequest.downloadQuizzes();
         quizViewModel.getQuizzes().observe(this, new Observer<List<Quiz>>() {
             @Override
             public void onChanged(@Nullable List<Quiz> quizzes) {

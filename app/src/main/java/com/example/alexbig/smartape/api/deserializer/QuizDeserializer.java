@@ -16,13 +16,47 @@ public class QuizDeserializer implements JsonDeserializer<Quiz>{
         Quiz quiz = new Quiz();
         JsonObject jsonObject = json.getAsJsonObject();
 
-        quiz.setTitle(jsonObject.get("Titulo").getAsString());
-        quiz.setDescription(jsonObject.get("Descripcion").getAsString());
-        quiz.setCreator(jsonObject.get("Creador").getAsString());
-        quiz.setStatus(jsonObject.get("Estado").getAsInt());
-        quiz.setTimeLimit(jsonObject.get("Tiempo_limite").getAsString());
-        quiz.setCategory(jsonObject.get("Categoria").getAsString());
-        quiz.setNumQuestions(jsonObject.get("Total_preguntas").getAsInt());
+        System.out.println(jsonObject.toString());
+        String title = jsonObject.get("Titulo").getAsString();
+        if (title != null){
+            quiz.setTitle(title);
+        }else{
+            quiz.setTitle("");
+        }
+
+        String description = jsonObject.get("Descripcion").getAsString();
+        if (description != null){
+            quiz.setDescription(description);
+        }else{
+            quiz.setDescription("");
+        }
+
+        String creator = jsonObject.get("Creador").getAsString();
+        if (creator != null){
+            quiz.setCreator(creator);
+        }else{
+            quiz.setCreator("");
+        }
+
+        int status = jsonObject.get("Estado").getAsInt();
+        quiz.setStatus(status);
+
+        int numQuestions = jsonObject.get("Total_preguntas").getAsInt();
+        quiz.setNumQuestions(numQuestions);
+
+        String timeLimit = jsonObject.get("Tiempo_limite").getAsString();
+        if (timeLimit != null){
+            quiz.setTimeLimit(timeLimit);
+        }else{
+            quiz.setTimeLimit("");
+        }
+
+        String category = jsonObject.get("Categoria").getAsString();
+        if (category != null){
+            quiz.setCategory(category);
+        }else{
+            quiz.setCategory("");
+        }
 
         return quiz;
     }
