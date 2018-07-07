@@ -1,4 +1,4 @@
-package com.example.alexbig.smartape.api.deserializer;
+package com.example.alexbig.smartape.api.deserializers;
 
 import com.example.alexbig.smartape.models.Quiz;
 import com.google.gson.JsonArray;

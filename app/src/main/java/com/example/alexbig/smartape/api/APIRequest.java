@@ -1,9 +1,8 @@
 package com.example.alexbig.smartape.api;
 
-import com.example.alexbig.smartape.api.deserializer.QuestionDeserializer;
-import com.example.alexbig.smartape.api.deserializer.QuizDeserializer;
-import com.example.alexbig.smartape.api.deserializer.TokenDeserializer;
-import com.example.alexbig.smartape.database.viewmodels.QuestionViewModel;
+import com.example.alexbig.smartape.api.deserializers.QuestionDeserializer;
+import com.example.alexbig.smartape.api.deserializers.QuizDeserializer;
+import com.example.alexbig.smartape.api.deserializers.TokenDeserializer;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.models.Question;
 import com.example.alexbig.smartape.models.Quiz;
