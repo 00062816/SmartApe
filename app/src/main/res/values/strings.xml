@@ -43,6 +43,7 @@
     <string name="text_delete_your_question">Delete your question</string>
     <string name="text_create_quiz">CREATE QUIZ</string>
     <string name="text_add_questions">Add questions</string>
+    <string name="text_previous">Previous</string>
 
     <string-array name="trending_options">
         <item>Month</item>
