@@ -15,6 +15,7 @@ public class QuestionDeserializer implements JsonDeserializer<Question>{
         Question question = new Question();
         JsonObject jsonObject = json.getAsJsonObject();
 
+        System.out.println("QUESTION JSON "+jsonObject.toString());
         question.setPremise(jsonObject.get("Premisa").getAsString());
         question.setType(jsonObject.get("Tipo_pregunta").getAsInt());
 

@@ -36,22 +36,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences sharedPreferences = this.getSharedPreferences("logged", MODE_PRIVATE);
-        Intent intentL = new Intent(this, LoginActivity.class);
+        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        APIRequest apiRequest = new APIRequest(this, quizViewModel);
 
-        if (sharedPreferences.contains("token")){
+        if (apiRequest.checkLogin()){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
             setTabs();
             setDrawer();
 
         }else {
+            Intent intentL = new Intent(this, LoginActivity.class);
             startActivity(intentL);
             finish();
         }
-        /*quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        apiRequest = new APIRequest(quizViewModel);
-        apiRequest.login("uca@edu.sv","chaleco234");*/
     }
 
     private void setTabs() {

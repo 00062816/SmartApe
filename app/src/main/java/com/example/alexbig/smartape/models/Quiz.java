@@ -1,8 +1,10 @@
 package com.example.alexbig.smartape.models;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Quiz {
+public class Quiz implements Serializable{
 
     private String category;
     private String title;
@@ -13,7 +15,8 @@ public class Quiz {
     private int numQuestions;
     private boolean favorite;
     private boolean saved;
-    private List<String> questions;
+    private List<String> questionsIds = new ArrayList<>();
+    private List<Question> questions = new ArrayList<>();
 
     public Quiz(){
 
@@ -91,11 +94,23 @@ public class Quiz {
         this.saved = saved;
     }
 
-    public List<String> getQuestions() {
+    public List<String> getQuestionsIds() {
+        return questionsIds;
+    }
+
+    public void setQuestionsIds(List<String> questionsIds) {
+        this.questionsIds = questionsIds;
+    }
+
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<String> questions) {
+    public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public void addQuestion(Question question){
+        this.questions.add(question);
     }
 }

@@ -29,7 +29,7 @@ public class CreateQuizActivity extends AppCompatActivity{
 
         final Quiz quiz = new Quiz();
         final QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        APIRequest apiRequest = new APIRequest(quizViewModel);
+        APIRequest apiRequest = new APIRequest(this, quizViewModel);
 
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,10 +37,7 @@ public class CreateQuizActivity extends AppCompatActivity{
                 quiz.setTitle(titleEditText.getText().toString());
                 quiz.setDescription(descriptionEditText.getText().toString());
                 quiz.setCategory(categorySpinner.getSelectedItem().toString());
-                quiz.setCreator("USER");
-                quiz.setNumQuestions(0);
-                quiz.setQuestions(new ArrayList<>());
-                quiz.setTimeLimit("0");
+                quiz.setTimeLimit("0:00");
 
                 apiRequest.uploadQuiz(quiz);
                 finish();

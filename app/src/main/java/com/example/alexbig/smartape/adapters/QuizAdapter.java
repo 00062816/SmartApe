@@ -1,6 +1,8 @@
 package com.example.alexbig.smartape.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.activities.MainActivity;
+import com.example.alexbig.smartape.activities.QuizActivity;
 import com.example.alexbig.smartape.api.APIRequest;
 import com.example.alexbig.smartape.models.Quiz;
 
@@ -86,8 +89,11 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                System.out.println("CLICKED "+quiz.getQuestions());
-                apiRequest.downloadQuestions(quiz.getQuestions());
+                Intent intent = new Intent(context, QuizActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("QUIZ", quiz);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }

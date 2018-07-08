@@ -29,11 +29,7 @@ public interface SmartApeAPI {
     @POST("/quiz")
     Call<Void> uploadQuiz(@Field("Categoria") String category,
                           @Field("Titulo") String title,
-                          @Field("Creador") String id,
                           @Field("Estado") int status,
                           @Field("Descripcion") String description,
-                          @Field("Tiempo_limite") String timeLimit,
-                          @Field("Total_preguntas") int numQuestions,
-                          @Field("Preguntas") String[] questionId,
-                          @Field("ElementosSociales") String social);
+                          @Field("Tiempo_limite") String timeLimit);
 }
