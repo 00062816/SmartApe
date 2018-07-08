@@ -1,6 +1,8 @@
 package com.example.alexbig.smartape.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -34,15 +36,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("logged", MODE_PRIVATE);
+        Intent intentL = new Intent(this, LoginActivity.class);
 
+        if (sharedPreferences.contains("token")){
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            setTabs();
+            setDrawer();
+
+        }else {
+            startActivity(intentL);
+            finish();
+        }
         /*quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         apiRequest = new APIRequest(quizViewModel);
         apiRequest.login("uca@edu.sv","chaleco234");*/
-
-        setTabs();
-        setDrawer();
     }
 
     private void setTabs() {
