@@ -9,8 +9,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.alexbig.smartape.R;
+import com.example.alexbig.smartape.api.APIRequest;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.models.Quiz;
+
+import java.util.ArrayList;
 
 public class CreateQuizActivity extends AppCompatActivity{
 
@@ -26,6 +29,7 @@ public class CreateQuizActivity extends AppCompatActivity{
 
         final Quiz quiz = new Quiz();
         final QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        APIRequest apiRequest = new APIRequest(quizViewModel);
 
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +38,11 @@ public class CreateQuizActivity extends AppCompatActivity{
                 quiz.setDescription(descriptionEditText.getText().toString());
                 quiz.setCategory(categorySpinner.getSelectedItem().toString());
                 quiz.setCreator("USER");
-                quizViewModel.insertQuiz(quiz);
+                quiz.setNumQuestions(0);
+                quiz.setQuestions(new ArrayList<>());
+                quiz.setTimeLimit("0");
+
+                apiRequest.uploadQuiz(quiz);
                 finish();
             }
         });

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.api.SmartApeAPI;
+import com.example.alexbig.smartape.api.deserializers.TokenDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

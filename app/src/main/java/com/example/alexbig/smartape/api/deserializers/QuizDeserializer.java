@@ -61,12 +61,16 @@ public class QuizDeserializer implements JsonDeserializer<Quiz>{
             quiz.setCategory("");
         }
 
-        List<String> questions = new ArrayList<>();
         JsonArray array = jsonObject.getAsJsonArray("Preguntas");
-        for (int i=0; i<array.size(); i++){
-            questions.add(array.get(i).getAsString());
+        if (array != null) {
+            List<String> questions = new ArrayList<>();
+            for (int i = 0; i < array.size(); i++) {
+                questions.add(array.get(i).getAsString());
+            }
+            quiz.setQuestions(questions);
+        }else{
+            quiz.setQuestions(new ArrayList<String>());
         }
-        quiz.setQuestions(questions);
 
         return quiz;
     }

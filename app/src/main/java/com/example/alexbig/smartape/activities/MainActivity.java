@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         apiRequest = new APIRequest(quizViewModel);
-        apiRequest.login("uca@edu.sv","chaleco234");
+        apiRequest.downloadQuizzes();
+        //apiRequest.login("uca@edu.sv","chaleco234");
 
         setTabs();
         setDrawer();

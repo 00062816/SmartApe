@@ -85,8 +85,10 @@ public class APIRequest {
     }
 
     public void downloadQuestions(List<String> questionIds){
-        for (String id:questionIds){
-            downloadQuestion(id);
+        if (questionIds != null) {
+            for (String id : questionIds) {
+                downloadQuestion(id);
+            }
         }
     }
 
@@ -103,6 +105,24 @@ public class APIRequest {
             @Override
             public void onFailure(Call<Question> call, Throwable t) {
                 t.printStackTrace();
+            }
+        });
+    }
+
+    public void uploadQuiz(Quiz quiz){
+        createAPIClient(new Gson());
+        String[] questionArray = new String[quiz.getQuestions().size()];
+        questionArray = quiz.getQuestions().toArray(questionArray);
+        Call<Void> uploadQuiz = smartApeAPI.uploadQuiz(quiz.getCategory(), quiz.getTitle(), quiz.getCreator(), quiz.getStatus(), quiz.getDescription(), quiz.getTimeLimit(), quiz.getNumQuestions(), questionArray, "");
+        uploadQuiz.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                quizViewModel.insertQuiz(quiz);
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
             }
         });
     }
