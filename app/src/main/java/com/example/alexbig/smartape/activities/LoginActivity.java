@@ -1,5 +1,6 @@
 package com.example.alexbig.smartape.activities;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,8 +13,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.alexbig.smartape.R;
+import com.example.alexbig.smartape.api.APIRequest;
 import com.example.alexbig.smartape.api.SmartApeAPI;
 import com.example.alexbig.smartape.api.deserializers.TokenDeserializer;
+import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -32,6 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
     private Button boton;
     private EditText usuario, contraseña;
+    private APIRequest apiRequest;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +46,9 @@ public class LoginActivity extends AppCompatActivity {
         contraseña = findViewById(R.id.editText_login_password);
         boton = findViewById(R.id.button_login_logIn);
 
+        QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        apiRequest = new APIRequest(this, quizViewModel);
+
         boton.setOnClickListener(v -> Click());
     }
 
@@ -50,57 +57,9 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Debes completar todos los campos", Toast.LENGTH_SHORT).show();
 
         } else {
-
-            Gson gson = new GsonBuilder().registerTypeAdapter(String.class, new TokenDeserializer()).create();
-            Retrofit.Builder builder = new Retrofit.Builder().baseUrl(SmartApeAPI.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson));
-            Retrofit retrofit = builder.build();
-            SmartApeAPI noticiasApi = retrofit.create(SmartApeAPI.class);
-
-            Call<String> stringCall = noticiasApi.login(usuario.getText().toString(), contraseña.getText().toString());
-            stringCall.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    System.out.println(response.code());
-                    if (response.code() == 200) {
-                        Toast.makeText(LoginActivity.this, "Sesión iniciada con exito", Toast.LENGTH_SHORT).show();
-                        TokenGuardado(response.body());
-                        startMainActivity();
-                    } else if (response.code() == 404) {
-
-                        Toast.makeText(LoginActivity.this, "No user found", Toast.LENGTH_SHORT).show();
-                    } else if(response.code() == 500){
-
-                        Toast.makeText(LoginActivity.this, "there was a problem finding the user", Toast.LENGTH_SHORT).show();
-
-                    } else {
-
-                        Toast.makeText(LoginActivity.this, "Error: check later", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    if (t instanceof SocketTimeoutException) {
-                        Toast.makeText(LoginActivity.this, "Time out", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+            apiRequest.login(usuario.getText().toString(), contraseña.getText().toString());
         }
 
-    }
-
-    private void TokenGuardado(String token) {
-        SharedPreferences preferences = this.getSharedPreferences("logged", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("token", token);
-        editor.commit();
-    }
-
-
-    private void startMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     @Override

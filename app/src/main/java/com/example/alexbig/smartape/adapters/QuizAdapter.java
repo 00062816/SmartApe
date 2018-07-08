@@ -1,6 +1,8 @@
 package com.example.alexbig.smartape.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.activities.MainActivity;
+import com.example.alexbig.smartape.activities.QuizActivity;
+import com.example.alexbig.smartape.api.APIRequest;
 import com.example.alexbig.smartape.models.Quiz;
 
 import java.util.List;
@@ -19,10 +23,12 @@ import java.util.List;
 public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder>{
 
     private Context context;
+    private APIRequest apiRequest;
     private List<Quiz> quizList;
 
-    public QuizAdapter(Context context){
+    public QuizAdapter(Context context, APIRequest apiRequest){
         this.context = context;
+        this.apiRequest = apiRequest;
     }
 
     public void setQuizList(List<Quiz> quizList){
@@ -77,6 +83,17 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
                 }else{
                     quiz.setSaved(false);
                 }
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, QuizActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("QUIZ", quiz);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }

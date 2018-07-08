@@ -22,6 +22,7 @@ import com.example.alexbig.smartape.api.APIRequest;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.fragments.QuizListFragment;
 import com.example.alexbig.smartape.models.Quiz;
+import com.example.alexbig.smartape.utils.ActivityManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,22 +38,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences sharedPreferences = this.getSharedPreferences("logged", MODE_PRIVATE);
-        Intent intentL = new Intent(this, LoginActivity.class);
+        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        APIRequest apiRequest = new APIRequest(this, quizViewModel);
 
-        if (sharedPreferences.contains("token")){
+        if (apiRequest.checkLogin()){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
             setTabs();
             setDrawer();
 
         }else {
+            Intent intentL = new Intent(this, LoginActivity.class);
             startActivity(intentL);
             finish();
         }
-        /*quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        apiRequest = new APIRequest(quizViewModel);
-        apiRequest.login("uca@edu.sv","chaleco234");*/
     }
 
     private void setTabs() {
@@ -140,11 +139,8 @@ public class MainActivity extends AppCompatActivity {
         addFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Quiz quiz = new Quiz();
-                quiz.setTitle("New Quiz");
-                quiz.setDescription("Quiz description");
-                quiz.setCreator("USER");
-                quizViewModel.insertQuiz(quiz);
+                Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
+                startActivity(intent);
             }
         });
         quizListFragment.sortMyQuizzes();
