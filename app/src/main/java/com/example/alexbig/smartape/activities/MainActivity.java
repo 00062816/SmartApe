@@ -21,6 +21,7 @@ import com.example.alexbig.smartape.api.APIRequest;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.fragments.QuizListFragment;
 import com.example.alexbig.smartape.models.Quiz;
+import com.example.alexbig.smartape.utils.ActivityManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,11 +134,8 @@ public class MainActivity extends AppCompatActivity {
         addFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Quiz quiz = new Quiz();
-                quiz.setTitle("New Quiz");
-                quiz.setDescription("Quiz description");
-                quiz.setCreator("USER");
-                quizViewModel.insertQuiz(quiz);
+                Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
+                startActivity(intent);
             }
         });
         quizListFragment.sortMyQuizzes();

@@ -112,7 +112,7 @@ public class APIRequest {
             public void onResponse(Call<List<Quiz>> call, retrofit2.Response<List<Quiz>> response) {
                 List<Quiz> quizList = response.body();
                 if (quizList != null) {
-                    quizViewModel.insertQuizzes(quizList);
+                    //quizViewModel.insertQuizzes(quizList);
                 }
                 System.out.println("QUIZZES DOWNLOADED "+quizList);
             }

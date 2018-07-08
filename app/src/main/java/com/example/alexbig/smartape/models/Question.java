@@ -1,9 +1,13 @@
 package com.example.alexbig.smartape.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Question {
 
     private String premise;
     private int type;
+    private List<Answer> answers = new ArrayList<>();
 
     public Question(){
 
@@ -23,5 +27,13 @@ public class Question {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 }

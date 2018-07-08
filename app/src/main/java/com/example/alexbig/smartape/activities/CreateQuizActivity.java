@@ -1,6 +1,7 @@
 package com.example.alexbig.smartape.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -35,11 +36,17 @@ public class CreateQuizActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 quiz.setTitle(titleEditText.getText().toString());
+                quiz.setStatus(0);
                 quiz.setDescription(descriptionEditText.getText().toString());
                 quiz.setCategory(categorySpinner.getSelectedItem().toString());
                 quiz.setTimeLimit("0:00");
 
-                apiRequest.uploadQuiz(quiz);
+                //apiRequest.uploadQuiz(quiz);
+                Intent intent = new Intent(getApplicationContext(), AddQuestionsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("QUIZ", quiz);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 finish();
             }
         });
