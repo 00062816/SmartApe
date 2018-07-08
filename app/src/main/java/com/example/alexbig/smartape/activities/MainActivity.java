@@ -1,6 +1,7 @@
 package com.example.alexbig.smartape.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -89,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_myquizzes_item:
                         openMyQuizzes();
                         break;
+
+                    case R.id.submenu_logout:
+                        logoutButtonClicked();
+                        break;
                 }
                 drawerLayout.closeDrawers();
                 return true;
@@ -139,6 +144,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         quizListFragment.sortMyQuizzes();
+    }
+    public void logoutButtonClicked(){
+        SharedPreferences sharedPreferences = this.getSharedPreferences("logged", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+
+        startActivity(new Intent(this, LoginActivity.class));
+
+        finish();
     }
 
     private void refresh(){

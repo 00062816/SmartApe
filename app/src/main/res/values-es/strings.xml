@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SmartApe</string>
+    <string name="text_app_s_logo">Logo de aplicación</string>
+    <string name="text_or">O</string>
+    <string name="text_hint_username">Usuario</string>
+    <string name="text_hint_password">Contraseña</string>
+    <string name="text_need_an_account">¿Aún no tienes cuenta?<u>Registrarse</u></string>
+    <string name="text_don_t_have_an_account">¿Aún no tienes cuenta?</string>
+    <string name="text_sign_in">Registrarse</string>
+    <string name="text_log_in">INICIAR SESIÓN</string>
+    <string name="text_app_s_title">Titulo de aplicación</string>
+    <string name="text_profile_item">Perfil</string>
+    <string name="text_groups_item">Grupos</string>
+    <string name="text_saved_item">Guardados</string>
+    <string name="text_my_quizzes_item">Mis cuestionarios</string>
+    <string name="text_others_item">Otros</string>
+    <string name="text_settings_item">Configuración</string>
+    <string name="text_donate_item">Donar</string>
+    <string name="text_notifications_item">Notificaciones</string>
+    <string name="text_favorite_quiz">Cuestionarios favoritos</string>
+    <string name="text_quiz_picture">Foto del cuestionario</string>
+    <string name="text_created_by">Creado por:</string>
+    <string name="text_user_picture">Foto de usuario</string>
+    <string name="text_divisor">|</string>
+    <string name="text_mark_quiz_as_saved">Marcar cuestionario como guardado</string>
+    <string name="text_mark_quiz_as_favorite">Marcar cuestionario como favorito</string>
+    <string name="text_favorite">Favorito</string>
+    <string name="text_top_this">Tendencia este</string>
+    <string name="text_quiz_title">Titulo cuestionario</string>
+    <string name="text_category">Categoria</string>
+    <string name="text_name">Nombre</string>
+    <string name="text_description">Descripción</string>
+    <string name="text_colon">:</string>
+    <string name="text_quiz_description">Descripción cuestionario</string>
+    <string name="text_time_limit">Tiempo limite</string>
+    <string name="text_next">SIGUIENTE</string>
+    <string name="text_quizzes_item">Cuestionarios</string>
+    <string name="text_dashboard_item">Muro</string>
+    <string name="tab_quizzes">Cuestionarios</string>
+    <string name="text_00">00</string>
+    <string name="text_create_your_own_quiz">CREA TU PROPIO CUESTIONARIO</string>
+    <string name="text_edit_your_question">Editar pregunta</string>
+    <string name="text_delete_your_question">Eliminar pregunta</string>
+    <string name="text_create_quiz">CREAR CUESTIONARIO</string>
+    <string name="text_add_questions">Agregar pregunta</string>
+</resources>
