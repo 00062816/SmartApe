@@ -51,6 +51,8 @@
     <string name="text_question">Question:</string>
     <string name="text_add_question">ADD QUESTION</string>
     <string name="text_question_type">Question type:</string>
+    <string name="text_point">.</string>
+    <string name="text_answer">Answer</string>
 
     <string-array name="trending_options">
         <item>Month</item>
