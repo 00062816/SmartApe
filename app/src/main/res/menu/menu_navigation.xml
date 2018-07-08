@@ -64,6 +64,24 @@
 
         </item>
 
+        <item
+            android:id="@+id/menu_logout_item"
+            android:title="">
+
+            <menu>
+
+                <group android:checkableBehavior="single">
+
+                    <item android:id="@+id/submenu_logout"
+                        android:title="@string/text_logout"
+                        android:icon="@drawable/ic_exit_to_app_light_gray_32dp"/>
+
+                </group>
+
+            </menu>
+
+        </item>
+
     </group>
 
 </menu>
