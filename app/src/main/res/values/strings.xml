@@ -43,6 +43,16 @@
     <string name="text_delete_your_question">Delete your question</string>
     <string name="text_create_quiz">CREATE QUIZ</string>
     <string name="text_add_questions">Add questions</string>
+    <string name="text_previous">Previous</string>
+    <string name="text_create_by">Create by:</string>
+    <string name="text_created_on">Created on:</string>
+    <string name="text_start">Start</string>
+    <string name="text_logout">Logout</string>
+    <string name="text_question">Question:</string>
+    <string name="text_add_question">ADD QUESTION</string>
+    <string name="text_question_type">Question type:</string>
+    <string name="text_point">.</string>
+    <string name="text_answer">Answer</string>
 
     <string-array name="trending_options">
         <item>Month</item>
@@ -60,5 +70,10 @@
         <item>Sports</item>
         <item>Technology</item>
         <item>Miscellaneous</item>
+    </string-array>
+
+    <string-array name="question_category_options">
+        <item>Multiple choice</item>
+        <item>True or False</item>
     </string-array>
 </resources>
