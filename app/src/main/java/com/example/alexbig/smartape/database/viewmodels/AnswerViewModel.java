@@ -30,4 +30,8 @@ public class AnswerViewModel extends AndroidViewModel{
         answerList.add(answer);
         answers.setValue(answerList);
     }
+
+    public void setAnswers(List<Answer> answerList){
+        this.answers.setValue(answerList);
+    }
 }

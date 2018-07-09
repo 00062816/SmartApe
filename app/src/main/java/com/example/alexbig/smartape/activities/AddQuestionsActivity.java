@@ -54,6 +54,7 @@ public class AddQuestionsActivity extends AppCompatActivity{
         createButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                quiz.setQuestions(questionViewModel.getQuestions().getValue());
                 quizViewModel.insertQuiz(quiz);
                 finish();
             }
