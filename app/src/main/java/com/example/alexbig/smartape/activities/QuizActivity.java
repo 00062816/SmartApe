@@ -2,9 +2,11 @@ package com.example.alexbig.smartape.activities;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +30,7 @@ import java.util.List;
 public class QuizActivity extends AppCompatActivity{
 
     private List<Question> questions = new ArrayList<>();
+    private List<Question> currentQuestions = new ArrayList<>();
     private TextView questionTextView;
     private AnswerViewModel answerViewModel;
     private AnswerAdapter answerAdapter;
@@ -45,12 +48,25 @@ public class QuizActivity extends AppCompatActivity{
 
         Intent intent = getIntent();
         Quiz quiz = (Quiz)intent.getSerializableExtra("QUIZ");
-        questionViewModel.setQuestions(quiz.getQuestions());
-
-        //apiRequest.downloadQuestions(questionViewModel, quiz);
+        questions = quiz.getQuestions();
+        currentQuestions = new ArrayList<>();
+        for (Question q:questions){
+            Question question = new Question();
+            question.setPremise(q.getPremise());
+            List<Answer> answers = new ArrayList<>();
+            for (Answer a: q.getAnswers()){
+                System.out.println("ANSWER "+a.isCorrect());
+                Answer answer = new Answer();
+                answer.setText(a.getText());
+                answers.add(answer);
+            }
+            question.setAnswers(answers);
+            question.setType(q.getType());
+            currentQuestions.add(question);
+        }
+        questionViewModel.setQuestions(currentQuestions);
 
         questionTextView = findViewById(R.id.textView_answerQuestion_question);
-
         RecyclerView recyclerView = findViewById(R.id.recyclerView_answerQuestion_answers);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         answerAdapter = new AnswerAdapter(this);
@@ -85,10 +101,18 @@ public class QuizActivity extends AppCompatActivity{
             }
         });
 
+        Button finish = findViewById(R.id.button_answerQuestion_finish);
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calculateResult();
+            }
+        });
+
         questionViewModel.getQuestions().observe(this, new Observer<List<Question>>() {
             @Override
             public void onChanged(@Nullable List<Question> questionList) {
-                questions = questionList;
+                currentQuestions = questionList;
             }
         });
 
@@ -98,10 +122,49 @@ public class QuizActivity extends AppCompatActivity{
                 answerAdapter.setAnswerList(answers);
             }
         });
+        setQuestion(0);
     }
 
     private void setQuestion(int counter){
-        questionTextView.setText(questions.get(counter).getPremise());
-        answerViewModel.setAnswers(questions.get(counter).getAnswers());
+        questionTextView.setText(currentQuestions.get(counter).getPremise());
+        answerViewModel.setAnswers(currentQuestions.get(counter).getAnswers());
+    }
+
+    private void calculateResult(){
+        boolean correct;
+        int numCorrect = 0;
+        int counter = questions.size();
+
+        for (int i=0; i<questions.size(); i++){
+            Question question = questions.get(i);
+            Question myQuestion = currentQuestions.get(i);
+            correct = true;
+
+            for (int j=0; j<question.getAnswers().size(); j++){
+                Answer answer = question.getAnswers().get(j);
+                Answer myAnswer = myQuestion.getAnswers().get(j);
+                if (answer.isCorrect() != myAnswer.isCorrect()){
+                    correct = false;
+                }
+            }
+            if (correct){
+                numCorrect++;
+            }
+        }
+
+        System.out.println("CORRECT "+numCorrect+" OUT OF "+counter);
+        System.out.println("GRADE "+(numCorrect*10)/counter);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Results");
+        builder.setMessage("Correct: "+numCorrect+"/"+counter+"\nGrade: "+(numCorrect*10)/counter);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
