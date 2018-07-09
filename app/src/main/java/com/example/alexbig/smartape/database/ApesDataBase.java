@@ -22,7 +22,7 @@ import com.example.alexbig.smartape.database.objects.Usuario;
 
 @Database(entities = {Pregunta.class, Quiz.class, Resuelto.class, Solucion.class, Usuario.class}, version = 1)
 public abstract class ApesDataBase extends RoomDatabase {
-    private static final String DB_NAME = "GameNews.db";
+    private static final String DB_NAME = "SmartApes.db";
     private static volatile ApesDataBase instance;
 
     public static synchronized ApesDataBase getInstance(Context context){
