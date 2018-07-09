@@ -2,8 +2,10 @@ package com.example.alexbig.smartape.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.view.View;
 
+import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.activities.LoginActivity;
 import com.example.alexbig.smartape.activities.MainActivity;
 import com.example.alexbig.smartape.api.deserializers.QuestionDeserializer;
@@ -32,7 +34,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIRequest {
-
     private static String token = "";
     private SmartApeAPI smartApeAPI;
     private QuizViewModel quizViewModel;
@@ -80,7 +81,7 @@ public class APIRequest {
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                 System.out.println(response.code());
                 if (response.code() == 200) {
-                    Toaster.makeToast(context, "Sesión iniciada con exito");
+                    Toaster.makeToast(context, "Login successful");
 
                     token = response.body();
                     SharedPreferences preferences = context.getSharedPreferences("logged", Context.MODE_PRIVATE);
@@ -94,10 +95,16 @@ public class APIRequest {
                     ActivityManager.closeActivity(context);
                 } else if (response.code() == 404) {
                     Toaster.makeToast(context, "No user found");
+                    ActivityManager.closeActivity(context);
+                    ActivityManager.openLoginActivity(context);
                 } else if(response.code() == 500){
                     Toaster.makeToast(context, "There was a problem finding the user");
+                    ActivityManager.closeActivity(context);
+                    ActivityManager.openLoginActivity(context);
                 } else {
                     Toaster.makeToast(context, "Error: check later");
+                    ActivityManager.closeActivity(context);
+                    ActivityManager.openLoginActivity(context);
                 }
             }
 
