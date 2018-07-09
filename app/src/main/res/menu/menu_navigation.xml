@@ -43,6 +43,10 @@
             android:icon="@drawable/ic_assignment_light_gray_32dp"/>
 
         <item
+            android:id="@+id/menu_broadcast_item"
+            android:title="@string/text_broadcast_item"/>
+
+        <item
             android:id="@+id/menu_others_item"
             android:title="">
 

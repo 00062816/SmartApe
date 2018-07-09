@@ -19,6 +19,7 @@ import com.example.alexbig.smartape.database.viewmodels.AnswerViewModel;
 import com.example.alexbig.smartape.models.Answer;
 import com.example.alexbig.smartape.models.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreateQuestionActivity extends AppCompatActivity{
@@ -38,6 +39,7 @@ public class CreateQuestionActivity extends AppCompatActivity{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         AnswerAdapter adapter = new AnswerAdapter(this);
+        adapter.setAnswerList(new ArrayList<>());
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
@@ -57,6 +59,10 @@ public class CreateQuestionActivity extends AppCompatActivity{
                 question.setPremise(questionEditText.getText().toString());
                 question.setAnswers(adapter.getAnswerList());
 
+                for (Answer a:adapter.getAnswerList()){
+                    System.out.println("ANSWER "+a.getText());
+                }
+
                 AddQuestionsActivity.questionViewModel.insertQuestion(question);
                 finish();
             }
@@ -65,7 +71,7 @@ public class CreateQuestionActivity extends AppCompatActivity{
         answerViewModel.getAnswers().observe(this, new Observer<List<Answer>>() {
             @Override
             public void onChanged(@Nullable List<Answer> answers) {
-                adapter.setAnswerList(answers);
+                //adapter.setAnswerList(answers);
             }
         });
     }

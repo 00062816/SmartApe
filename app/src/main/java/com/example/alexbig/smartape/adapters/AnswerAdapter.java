@@ -28,6 +28,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 
     public void setAnswerList(List<Answer> answerList){
         this.answerList = answerList;
+        this.notifyDataSetChanged();
     }
 
     public List<Answer> getAnswerList(){
@@ -45,24 +46,6 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
     @Override
     public void onBindViewHolder(@NonNull AnswerViewHolder holder, int position) {
         final Answer answer = answerList.get(position);
-        holder.answerTextView.setText(answer.getText());
-
-        holder.answerTextView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                answer.setText(charSequence.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
 
         holder.checkBox.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -72,6 +55,23 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
                 }else{
                     answer.setCorrect(false);
                 }
+            }
+        });
+
+        holder.answerTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+               answer.setText(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
     }
