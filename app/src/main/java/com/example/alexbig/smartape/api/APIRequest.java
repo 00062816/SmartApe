@@ -2,7 +2,10 @@ package com.example.alexbig.smartape.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
 
+import com.example.alexbig.smartape.activities.LoginActivity;
+import com.example.alexbig.smartape.activities.MainActivity;
 import com.example.alexbig.smartape.api.deserializers.QuestionDeserializer;
 import com.example.alexbig.smartape.api.deserializers.QuizDeserializer;
 import com.example.alexbig.smartape.api.deserializers.TokenDeserializer;
@@ -38,6 +41,10 @@ public class APIRequest {
     public APIRequest(Context context, QuizViewModel quizViewModel){
         this.context = context;
         this.quizViewModel = quizViewModel;
+    }
+
+    public APIRequest(Context context){
+        this.context = context;
     }
 
     private void createAPIClient(Gson gson){
@@ -96,6 +103,28 @@ public class APIRequest {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                if (t instanceof SocketTimeoutException) {
+                    Toaster.makeToast(context, "Time out");
+                }
+            }
+        });
+    }
+
+    public void signIn(String email, String password){
+        createAPIClient(new Gson());
+        Call<Void> signIn = smartApeAPI.signIn(email, password);
+        signIn.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                System.out.println(response.code());
+
+                if (response.code() == 200){
+                    login(email, password);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
                 if (t instanceof SocketTimeoutException) {
                     Toaster.makeToast(context, "Time out");
                 }

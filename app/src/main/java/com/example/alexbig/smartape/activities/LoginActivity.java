@@ -8,8 +8,12 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alexbig.smartape.R;
@@ -36,6 +40,9 @@ public class LoginActivity extends AppCompatActivity {
     private Button boton;
     private EditText usuario, contraseña;
     private APIRequest apiRequest;
+    private ProgressBar progressBarLogin;
+    private RelativeLayout mainContainer;
+    private TextView signInTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,10 +53,21 @@ public class LoginActivity extends AppCompatActivity {
         contraseña = findViewById(R.id.editText_login_password);
         boton = findViewById(R.id.button_login_logIn);
 
+        mainContainer = findViewById(R.id.relativeLayout_login_mainContainer);
+        progressBarLogin = findViewById(R.id.progressBar_login_loading);
+        signInTextView = findViewById(R.id.textView_login_signIn);
+
         QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         apiRequest = new APIRequest(this, quizViewModel);
 
         boton.setOnClickListener(v -> Click());
+        signInTextView.setOnClickListener(v -> ClickedSignIn());
+    }
+
+    private void ClickedSignIn() {
+        Intent intent = new Intent(this, SignInActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void Click() {
@@ -57,6 +75,8 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Debes completar todos los campos", Toast.LENGTH_SHORT).show();
 
         } else {
+            mainContainer.setVisibility(View.GONE);
+            progressBarLogin.setVisibility(View.VISIBLE);
             apiRequest.login(usuario.getText().toString(), contraseña.getText().toString());
         }
 
