@@ -73,7 +73,7 @@ public class APIRequest {
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                 System.out.println(response.code());
                 if (response.code() == 200) {
-                    Toaster.makeToast(context, "Sesión iniciada con exito");
+                    Toaster.makeToast(context, "@string/text_nice_login");
 
                     token = response.body();
                     SharedPreferences preferences = context.getSharedPreferences("logged", Context.MODE_PRIVATE);
@@ -86,18 +86,18 @@ public class APIRequest {
                     ActivityManager.openMainActivity(context);
                     ActivityManager.closeActivity(context);
                 } else if (response.code() == 404) {
-                    Toaster.makeToast(context, "No user found");
+                    Toaster.makeToast(context, "@string/text_no_user_found");
                 } else if(response.code() == 500){
-                    Toaster.makeToast(context, "There was a problem finding the user");
+                    Toaster.makeToast(context, "@string/text_there_was_a_problem");
                 } else {
-                    Toaster.makeToast(context, "Error: check later");
+                    Toaster.makeToast(context, "@string/text_check_later");
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 if (t instanceof SocketTimeoutException) {
-                    Toaster.makeToast(context, "Time out");
+                    Toaster.makeToast(context, "@string/text_time_out");
                 }
             }
         });

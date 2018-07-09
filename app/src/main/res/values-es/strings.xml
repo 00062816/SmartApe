@@ -44,4 +44,20 @@
     <string name="text_delete_your_question">Eliminar pregunta</string>
     <string name="text_create_quiz">CREAR CUESTIONARIO</string>
     <string name="text_add_questions">Agregar pregunta</string>
+    <string name="text_time_out">Tiempo de espera excedido</string>
+    <string name="text_check_later">Error: Intentelo mas tarde</string>
+    <string name="text_there_was_a_problem">Hubo un error encontrando al usuario</string>
+    <string name="text_no_user_found">No se encontro el usuario</string>
+    <string name="text_nice_login">Sesión exitosa</string>
+    <string name="text_complete_fields">Debes completar todos los campos</string>
+    <string name="text_previous">Anterior</string>
+    <string name="text_create_by">Creado por:</string>
+    <string name="text_created_on">Creado el:</string>
+    <string name="text_start">Inicio</string>
+    <string name="text_logout">Salir</string>
+    <string name="text_question">Pregunta:</string>
+    <string name="text_add_question">AGREGAR PREGUNTA</string>
+    <string name="text_question_type">Tipo de pregunta</string>
+    <string name="text_point">.</string>
+    <string name="text_answer">Respuesta</string>
 </resources>
