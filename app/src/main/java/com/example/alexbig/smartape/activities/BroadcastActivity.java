@@ -33,6 +33,7 @@ import com.abemart.wroup.service.WroupService;
 import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.models.Quiz;
+import com.example.alexbig.smartape.utils.JsonConverter;
 import com.example.alexbig.smartape.utils.Toaster;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
         createGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createGroup();
+               createGroupDialog();
             }
         });
         findGroupButton.setOnClickListener(new View.OnClickListener() {
@@ -93,9 +94,12 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Quiz quiz = quizViewModel.getQuizzes().getValue().get(i);
+                System.out.println("JSON pre "+JsonConverter.toJson(quiz));
                 createGroup(quiz);
             }
         });
+        AlertDialog pickQuizDialog = builder.create();
+        pickQuizDialog.show();
     }
 
     private void createGroup(Quiz quiz){
@@ -117,9 +121,9 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
             @Override
             public void onClientConnected(WroupDevice wroupDevice) {
                 MessageWrapper message = new MessageWrapper();
-                message.setMessage("CONNECTED");
+                message.setMessage(JsonConverter.toJson(quiz));
                 message.setMessageType(MessageWrapper.MessageType.NORMAL);
-                wroupService.sendMessageToAllClients(message);
+                wroupService.sendMessage(wroupDevice, message);
             }
         });
 
@@ -171,15 +175,15 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
     }
 
     private void connectTo(WroupServiceDevice serviceDevice){
-        /*ProgressDialog progressDialog = new ProgressDialog(BroadcastActivity.this);
+        ProgressDialog progressDialog = new ProgressDialog(BroadcastActivity.this);
         progressDialog.setMessage("Connecting...");
         progressDialog.setIndeterminate(true);
-        progressDialog.show();*/
+        progressDialog.show();
 
         wroupClient.connectToService(serviceDevice, new ServiceConnectedListener() {
             @Override
             public void onServiceConnected(WroupDevice serviceDevice) {
-                //progressDialog.dismiss();
+                progressDialog.dismiss();
                 Toaster.makeToast(getApplicationContext(), "Connected");
             }
         });
@@ -192,16 +196,16 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
             public void run() {
                 System.out.println("MESSAGE "+messageWrapper.getMessage());
                 if (messageWrapper.getMessageType() == MessageWrapper.MessageType.NORMAL) {
-                    openQuiz();
+                    openQuiz(JsonConverter.toQuiz(messageWrapper.getMessage()));
                 }
             }
         });
     }
 
-    private void openQuiz(){
+    private void openQuiz(Quiz quiz){
         Intent intent = new Intent(this, QuizActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("QUIZ", new Quiz());
+        bundle.putSerializable("QUIZ", quiz);
         intent.putExtras(bundle);
         startActivity(intent);
     }
