@@ -23,6 +23,7 @@
         <activity android:name=".activities.QuizActivity"/>
         <activity android:name=".activities.AddQuestionsActivity"/>
         <activity android:name=".activities.CreateQuestionActivity"/>
+        <activity android:name=".activities.SignInActivity"/>
     </application>
 
 </manifest>

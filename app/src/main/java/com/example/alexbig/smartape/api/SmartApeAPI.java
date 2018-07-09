@@ -19,6 +19,10 @@ public interface SmartApeAPI {
     @POST("/usuario/login")
     Call<String> login(@Field("Correo") String username, @Field("Password") String password);
 
+    @FormUrlEncoded
+    @POST("/usuario/crear")
+    Call<Void> signIn(@Field("Correo") String email, @Field("Password") String password);
+
     @GET("/quiz")
     Call<List<Quiz>> getQuizzes();
 

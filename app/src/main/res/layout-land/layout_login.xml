@@ -9,87 +9,104 @@
     android:paddingStart="64dp">
 
     <RelativeLayout
-        android:id="@+id/relativeLayout_login_allFields"
+        android:id="@+id/relativeLayout_login_mainContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView_login_appLogo"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/text_app_s_logo" />
-
-        <ImageView
-            android:id="@+id/imageView_login_appName"
-            android:layout_width="250dp"
-            android:layout_height="35dp"
-            android:layout_below="@id/imageView_login_appLogo"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/text_app_s_title" />
-
-        <EditText
-            android:id="@+id/editText_login_user"
+        <RelativeLayout
+            android:id="@+id/relativeLayout_login_allFields"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imageView_login_appName"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/shape_edit_text"
-            android:hint="@string/text_hint_username"
-            android:inputType="text"
-            android:lines="1"
-            android:padding="8dp"
-            android:textSize="16sp" />
+            android:layout_centerInParent="true"
+            android:gravity="center">
 
-        <EditText
-            android:id="@+id/editText_login_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/editText_login_user"
-            android:layout_marginBottom="4dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/shape_edit_text"
-            android:hint="@string/text_hint_password"
-            android:inputType="textPassword"
-            android:lines="1"
-            android:padding="8dp"
-            android:textSize="16sp" />
+            <ImageView
+                android:id="@+id/imageView_login_appLogo"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/text_app_s_logo" />
 
-        <Button
-            android:id="@+id/button_login_logIn"
+            <ImageView
+                android:id="@+id/imageView_login_appName"
+                android:layout_width="250dp"
+                android:layout_height="35dp"
+                android:layout_below="@id/imageView_login_appLogo"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/text_app_s_title" />
+
+            <EditText
+                android:id="@+id/editText_login_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageView_login_appName"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/shape_edit_text"
+                android:hint="@string/text_hint_username"
+                android:inputType="text"
+                android:lines="1"
+                android:padding="8dp"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/editText_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editText_login_user"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/shape_edit_text"
+                android:hint="@string/text_hint_password"
+                android:inputType="textPassword"
+                android:lines="1"
+                android:padding="8dp"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/button_login_logIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editText_login_password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/shape_button"
+                android:text="@string/text_log_in" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_login_createAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editText_login_password"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/shape_button"
-            android:text="@string/text_log_in" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:text="@string/text_don_t_have_an_account" />
+
+            <TextView
+                android:id="@+id/textView_login_signIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_sign_in"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout_login_createAccount"
+    <ProgressBar
+        android:id="@+id/progressBar_login_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:text="@string/text_don_t_have_an_account" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_sign_in"
-            android:textStyle="bold" />
-    </LinearLayout>
+        android:layout_centerInParent="true"
+        style="?android:attr/progressBarStyleLarge"
+        android:progressDrawable="@drawable/circular_progress_view"
+        android:visibility="gone"/>
 
 </RelativeLayout>

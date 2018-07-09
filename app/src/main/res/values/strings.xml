@@ -53,6 +53,12 @@
     <string name="text_question_type">Question type:</string>
     <string name="text_point">.</string>
     <string name="text_answer">Answer</string>
+    <string name="text_username">Username</string>
+    <string name="text_password">Password</string>
+    <string name="text_confirm_your_password">Confirm your password</string>
+    <string name="text_sign_in_to_smartape">Sign in to SmartApe</string>
+    <string name="text_button_sign_in">SIGN IN</string>
+    <string name="text_email_address">Email address</string>
 
     <string-array name="trending_options">
         <item>Month</item>

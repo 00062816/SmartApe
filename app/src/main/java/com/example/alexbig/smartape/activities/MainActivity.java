@@ -40,10 +40,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         APIRequest apiRequest = new APIRequest(this, quizViewModel);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         if (apiRequest.checkLogin()){
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
+
             setTabs();
             setDrawer();
 
