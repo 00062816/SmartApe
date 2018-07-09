@@ -75,7 +75,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.menu_profile_item:
+                        openQuizzes();
+                        break;
+
+                    case R.id.menu_groups_item:
+                        openQuizzes();
+                        break;
+
                     case R.id.menu_quizzes_item:
+                        openQuizzes();
+                        break;
+                    case R.id.menu_saved_item:
                         openQuizzes();
                         break;
 
@@ -83,12 +94,16 @@ public class MainActivity extends AppCompatActivity {
                         openFavorites();
                         break;
 
-                    case R.id.menu_saved_item:
-                        openSaved();
-                        break;
-
                     case R.id.menu_myquizzes_item:
                         openMyQuizzes();
+                        break;
+
+                    case R.id.submenu_settings_item:
+                        openQuizzes();
+                        break;
+
+                    case R.id.submenu_donate_item:
+                        openQuizzes();
                         break;
 
                     case R.id.submenu_logout:
