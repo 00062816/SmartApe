@@ -24,6 +24,7 @@ public class QuizActivity extends AppCompatActivity{
         super.onCreate(savedInstanceBundle);
         setContentView(R.layout.layout_answer_question);
 
+
         Intent intent = getIntent();
         Quiz quiz = (Quiz)intent.getSerializableExtra("QUIZ");
 
