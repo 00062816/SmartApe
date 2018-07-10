@@ -42,8 +42,7 @@ public class QuizListFragment extends Fragment{
         quizViewModel.getQuizzes().observe(this, new Observer<List<Quiz>>() {
              @Override
              public void onChanged(@Nullable List<Quiz> quizzes) {
-                 quizList = quizzes;
-                 setQuizList(quizList);
+                 setQuizList(quizzes);
              }
          });
 

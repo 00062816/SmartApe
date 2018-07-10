@@ -103,7 +103,11 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     @Override
     public int getItemCount() {
-        return quizList.size();
+        if (quizList != null){
+            return quizList.size();
+        }else {
+            return 0;
+        }
     }
 
     public class QuizViewHolder extends RecyclerView.ViewHolder{
