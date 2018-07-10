@@ -1,4 +1,4 @@
-package com.example.alexbig.smartape.database.entities;
+package com.example.alexbig.smartape.database.objects;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -9,6 +9,7 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "pregunta_table")
 public class PreguntaEntity {
+
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "_id")
@@ -17,10 +18,14 @@ public class PreguntaEntity {
     private String Premisa;
     @ColumnInfo(name = "tipo_pregunta")
     private int Tipo_pregunta;
-    @ForeignKey(entity = QuizEntity.class, parentColumns = "_id", childColumns = "quizid",
+    @ForeignKey(entity = Quiz.class, parentColumns = "_id", childColumns = "quizid",
             onDelete = CASCADE)
     @ColumnInfo(name = "quizid")
-    private int quizid;
+    private String quizid;
+    @ColumnInfo(name = "Fecha_creacion")
+    private String fecha_creacion;
+
+
 
     @NonNull
     public String getId() {
@@ -35,7 +40,7 @@ public class PreguntaEntity {
         return Tipo_pregunta;
     }
 
-    public int getQuizid() {
+    public String getQuizid() {
         return quizid;
     }
 
@@ -51,9 +56,15 @@ public class PreguntaEntity {
         Tipo_pregunta = tipo_pregunta;
     }
 
-    public void setQuizid(int quizid) {
+    public void setQuizid(String quizid) {
         this.quizid = quizid;
     }
 
+    public String getFecha_creacion() {
+        return fecha_creacion;
+    }
 
+    public void setFecha_creacion(String fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
 }

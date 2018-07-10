@@ -1,6 +1,7 @@
 package com.example.alexbig.smartape.api.deserializers;
 
-import com.example.alexbig.smartape.database.entities.PreguntaEntity;
+import com.example.alexbig.smartape.database.objects.PreguntaEntity;
+import com.example.alexbig.smartape.models.Question;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
