@@ -26,15 +26,27 @@ public class QuizListFragment extends Fragment{
     private QuizAdapter quizAdapter;
     private APIRequest apiRequest;
     private QuizViewModel quizViewModel;
-    private List<Quiz> quizList;
     private List<QuizEntity> quizEntityList = new ArrayList<>();
+
+    public static QuizListFragment newInstance(int type){
+        Bundle arguments = new Bundle();
+        arguments.putInt("type", type);
+
+        QuizListFragment quizListFragment = new QuizListFragment();
+        quizListFragment.setArguments(arguments);
+        return quizListFragment;
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.layout_dashboard, container, false);
+
         quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+
         apiRequest = new APIRequest(getContext());
         apiRequest.downloadQuizzes(quizViewModel);
+
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_dashboard_allQuizzes);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -42,13 +54,10 @@ public class QuizListFragment extends Fragment{
         recyclerView.setAdapter(quizAdapter);
         recyclerView.setHasFixedSize(true);
 
-        System.out.println("Hola");
-
-
         quizViewModel.getAllQuizzes().observe(this, new Observer<List<QuizEntity>>() {
             @Override
             public void onChanged(@Nullable List<QuizEntity> quizEntities) {
-                System.out.println(quizEntities);
+                quizAdapter.setQuizList(quizEntities);
             }
         });
 
@@ -59,41 +68,26 @@ public class QuizListFragment extends Fragment{
         this.apiRequest = apiRequest;
     }
 
-    private void setQuizList(List<Quiz> quizList){
+    public void setQuizList(List<QuizEntity> quizList){
         quizAdapter.setQuizList(quizList);
     }
 
-    public void sortAll(){
-        setQuizList(quizList);
-    }
+    public List<QuizEntity> filterQuizzes(int type){
+       switch (type){
+           case 1:
+               apiRequest.downloadQuizzes(quizViewModel);
+               break;
+           case 2:
+                apiRequest.downloadFavedQuizzes(quizViewModel);
+               break;
+           case 3:
+               apiRequest.downloadSavedQuizzes(quizViewModel);
+               break;
+           case 4:
+               apiRequest.downloadCreatedQuizzes(quizViewModel);
+               break;
+       }
 
-    public void sortFavorites(){
-        List<Quiz> newList = new ArrayList<>();
-        for (Quiz q : quizList) {
-            if (q.isFavorite()) {
-                newList.add(q);
-            }
-        }
-        setQuizList(newList);
-    }
-
-    public void sortSaved(){
-        List<Quiz> newList = new ArrayList<>();
-        for (Quiz q : quizList) {
-            if (q.isSaved()) {
-                newList.add(q);
-            }
-        }
-        setQuizList(newList);
-    }
-
-    public void sortMyQuizzes(){
-        List<Quiz> newList = new ArrayList<>();
-        for (Quiz q : quizList) {
-            if (q.getCreator().equals("USER")) {
-                newList.add(q);
-            }
-        }
-        setQuizList(newList);
+        return quizEntityList;
     }
 }

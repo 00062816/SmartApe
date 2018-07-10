@@ -22,11 +22,23 @@ public class QuizViewModel extends AndroidViewModel{
         quizRepository = new QuizRepository(application);
     }
 
+
+
     public void insert(QuizEntity quizEntity){
         quizRepository.insert(quizEntity);
+    }
+
+
+    public void insertList(List<QuizEntity> quizEntity){
+        quizRepository.insertList(quizEntity);
     }
 
     public LiveData<List<QuizEntity>> getAllQuizzes(){
         return quizRepository.getAllQuizzes();
     }
+
+    public LiveData<List<QuizEntity>> getQuizzesById(String id){
+        return quizRepository.getQuizzesById(id);
+    }
+
 }

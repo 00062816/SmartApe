@@ -34,8 +34,8 @@ public interface QuizDao {
     @Query("SELECT * FROM quiz_table")
     LiveData<List<QuizEntity>> getAllQuiz();
 
-    @Query("SELECT * FROM quiz_table WHERE _id IN (:quizIds)")
-    LiveData<List<QuizEntity>> loadAllByIds(String... quizIds);
+    @Query("SELECT * FROM quiz_table WHERE _id LIKE :q_id")
+    LiveData<List<QuizEntity>> getQuizzesById(String q_id);
 
     @Query("SELECT * FROM quiz_table WHERE _id IN (:quizIds)")
     LiveData<QuizEntity> FindOne(String quizIds);

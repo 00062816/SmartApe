@@ -36,6 +36,10 @@ public class QuizRepository {
         return quizDao.getAllQuiz();
     }
 
+    public LiveData<List<QuizEntity>> getQuizzesById(String id){
+        return quizDao.getQuizzesById(id);
+    }
+
     public void insert(QuizEntity quizEntity){
         new InsertAsyncTask(quizDao).execute(quizEntity);
     }
@@ -50,11 +54,32 @@ public class QuizRepository {
 
         @Override
         protected Void doInBackground(QuizEntity... quizEntities) {
+            myAsyncTaskQuizDao.DeleteAllQuiz();
             myAsyncTaskQuizDao.insert(quizEntities);
             return null;
         }
     }
 
+    public void insertList(List<QuizEntity> quizEntity){
+        new InsertListAsyncTask(quizDao).execute(quizEntity);
+    }
+
+    private static class InsertListAsyncTask extends AsyncTask<List<QuizEntity>, Void, Void>{
+
+        private QuizDao myAsyncTaskQuizDao;
+
+        InsertListAsyncTask(QuizDao dao){
+            myAsyncTaskQuizDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(List<QuizEntity>... quizEntities) {
+            myAsyncTaskQuizDao.DeleteAllQuiz();
+        for(QuizEntity e : quizEntities[0])
+            myAsyncTaskQuizDao.insert(e);
+            return null;
+        }
+    }
 
 }
 
