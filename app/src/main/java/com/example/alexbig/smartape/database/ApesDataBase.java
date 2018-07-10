@@ -10,7 +10,7 @@ import com.example.alexbig.smartape.database.daos.QuizDao;
 import com.example.alexbig.smartape.database.daos.ResueltoDao;
 import com.example.alexbig.smartape.database.daos.SolucionDao;
 import com.example.alexbig.smartape.database.daos.UsuarioDao;
-import com.example.alexbig.smartape.database.entities.Pregunta;
+import com.example.alexbig.smartape.database.entities.PreguntaEntity;
 import com.example.alexbig.smartape.database.entities.QuizEntity;
 import com.example.alexbig.smartape.database.entities.Resuelto;
 import com.example.alexbig.smartape.database.entities.Solucion;
@@ -20,7 +20,7 @@ import com.example.alexbig.smartape.database.entities.Usuario;
  * Created by Andres on 4/7/2018.
  */
 
-@Database(entities = {Pregunta.class, QuizEntity.class, Resuelto.class, Solucion.class, Usuario.class}, version = 1)
+@Database(entities = {PreguntaEntity.class, QuizEntity.class, Resuelto.class, Solucion.class, Usuario.class}, version = 1)
 public abstract class ApesDataBase extends RoomDatabase {
     private static final String DB_NAME = "SmartApes.db";
     private static volatile ApesDataBase instance;
