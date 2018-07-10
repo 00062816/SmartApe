@@ -40,8 +40,8 @@
     <string name="tab_quizzes">Cuestionarios</string>
     <string name="text_00">00</string>
     <string name="text_create_your_own_quiz">CREA TU PROPIO CUESTIONARIO</string>
-    <string name="text_edit_your_question">Editar pregunta</string>
-    <string name="text_delete_your_question">Eliminar pregunta</string>
+    <string name="text_edit_your_question">Editar preguntaEntity</string>
+    <string name="text_delete_your_question">Eliminar preguntaEntity</string>
     <string name="text_create_quiz">CREAR CUESTIONARIO</string>
-    <string name="text_add_questions">Agregar pregunta</string>
+    <string name="text_add_questions">Agregar preguntaEntity</string>
 </resources>

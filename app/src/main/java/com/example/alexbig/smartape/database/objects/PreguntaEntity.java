@@ -8,7 +8,8 @@ import android.support.annotation.NonNull;
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "pregunta_table")
-public class Pregunta {
+public class PreguntaEntity {
+
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "_id")
@@ -20,7 +21,11 @@ public class Pregunta {
     @ForeignKey(entity = Quiz.class, parentColumns = "_id", childColumns = "quizid",
             onDelete = CASCADE)
     @ColumnInfo(name = "quizid")
-    private int quizid;
+    private String quizid;
+    @ColumnInfo(name = "Fecha_creacion")
+    private String fecha_creacion;
+
+
 
     @NonNull
     public String getId() {
@@ -35,7 +40,7 @@ public class Pregunta {
         return Tipo_pregunta;
     }
 
-    public int getQuizid() {
+    public String getQuizid() {
         return quizid;
     }
 
@@ -51,9 +56,15 @@ public class Pregunta {
         Tipo_pregunta = tipo_pregunta;
     }
 
-    public void setQuizid(int quizid) {
+    public void setQuizid(String quizid) {
         this.quizid = quizid;
     }
 
+    public String getFecha_creacion() {
+        return fecha_creacion;
+    }
 
+    public void setFecha_creacion(String fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
 }
