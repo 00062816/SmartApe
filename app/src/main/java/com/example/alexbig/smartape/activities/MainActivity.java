@@ -67,9 +67,6 @@ public class MainActivity extends AppCompatActivity {
 =======
 
         addFAB = findViewById(R.id.addFAB);
-<<<<<<< HEAD
->>>>>>> parent of ef98964... Correccion de errores y funcionalidad para editar y quitar preguntas y respuestas
-=======
 >>>>>>> parent of ef98964... Correccion de errores y funcionalidad para editar y quitar preguntas y respuestas
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -119,6 +116,55 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+<<<<<<< HEAD
+
+=======
+    private void openQuizzes(){
+        addFAB.setVisibility(View.INVISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        quizListFragment.sortAll();
+    }
+
+    private void openFavorites() {
+        addFAB.setVisibility(View.INVISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        quizListFragment.sortFavorites();
+    }
+
+    private void openSaved() {
+        addFAB.setVisibility(View.INVISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        quizListFragment.sortSaved();
+    }
+
+    private void openMyQuizzes() {
+        addFAB.setVisibility(View.VISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
+                startActivity(intent);
+            }
+        });
+        quizListFragment.sortMyQuizzes();
+    }
+>>>>>>> parent of ef98964... Correccion de errores y funcionalidad para editar y quitar preguntas y respuestas
 
     public void openBroadcastActivity(){
         Intent intent = new Intent(this, BroadcastActivity.class);
