@@ -12,11 +12,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-<<<<<<< HEAD
-import com.example.alexbig.smartape.database.entities.Resuelto;
-=======
 import com.example.alexbig.smartape.database.objects.Resuelto;
->>>>>>> master
 
 import java.util.List;
 

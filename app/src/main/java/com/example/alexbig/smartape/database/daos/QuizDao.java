@@ -13,34 +13,31 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 
-import com.example.alexbig.smartape.database.entities.QuizEntity;
+import com.example.alexbig.smartape.database.objects.Quiz;
 
 import java.util.List;
 
 @Dao
 public interface QuizDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(QuizEntity... quizEntities);
+    void insert(Quiz... quizzes);
 
     @Delete
-    void delete(QuizEntity quizEntity);
+    void delete(Quiz quiz);
 
     @Update
-    void update(QuizEntity... quizEntities);
+    void update(Quiz... quizzes);
 
     @Query("DELETE FROM quiz_table")
     void DeleteAllQuiz();
 
-    @Query("SELECT * FROM quiz_table")
-    LiveData<List<QuizEntity>> getAllQuiz();
-
-    @Query("SELECT * FROM quiz_table WHERE _id LIKE :q_id")
-    LiveData<List<QuizEntity>> getQuizzesById(String q_id);
+    @Query("SELECT * FROM quiz_table WHERE _id IN (:quizIds)")
+    List<Quiz> loadAllByIds(String... quizIds);
 
     @Query("SELECT * FROM quiz_table WHERE _id IN (:quizIds)")
-    LiveData<QuizEntity> FindOne(String quizIds);
+    LiveData<Quiz> FindOne(String quizIds);
 
     // Ejemplo de query para sacar quiz con referencia del usuario
     @Query("SELECT * FROM quiz_table WHERE Creador=:userId")
-    LiveData<List<QuizEntity>> findRepositoriesForUser(String userId);
+    List<Quiz> findRepositoriesForUser(String userId);
 }

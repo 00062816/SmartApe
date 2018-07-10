@@ -73,7 +73,7 @@ public class AddQuestionsActivity extends AppCompatActivity{
                 }
 
                 quiz.setQuestions(questionViewModel.getQuestions().getValue());
-                //quizViewModel.insertQuiz(quiz);
+                quizViewModel.insertQuiz(quiz);
                 finish();
             }
         });

@@ -23,13 +23,13 @@
     <string name="text_settings_item">Settings</string>
     <string name="text_donate_item">Donate</string>
     <string name="text_notifications_item">Notifications</string>
-    <string name="text_favorite_quiz">Favorite quizEntity</string>
+    <string name="text_favorite_quiz">Favorite quiz</string>
     <string name="text_quiz_picture">Quiz picture</string>
     <string name="text_created_by">Created by:</string>
     <string name="text_user_picture">User picture</string>
     <string name="text_divisor">|</string>
-    <string name="text_mark_quiz_as_saved">Mark quizEntity as saved</string>
-    <string name="text_mark_quiz_as_favorite">Mark quizEntity as favorite</string>
+    <string name="text_mark_quiz_as_saved">Mark quiz as saved</string>
+    <string name="text_mark_quiz_as_favorite">Mark quiz as favorite</string>
     <string name="text_favorite">Favorite</string>
     <string name="text_top_this">Top this</string>
     <string name="text_quiz_title">Quiz title</string>
@@ -65,18 +65,10 @@
     <string name="text_sign_in_to_smartape">Sign in to SmartApe</string>
     <string name="text_button_sign_in">SIGN IN</string>
     <string name="text_email_address">Email address</string>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
     <string name="text_successful_login">Login successful</string>
     <string name="text_broadcast_item">Broadcast</string>
     <string name="text_coming_soon">Coming soon</string>
     <string name="text_finish">Finish</string>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
     <string-array name="trending_options">
         <item>Month</item>
         <item>Week</item>
