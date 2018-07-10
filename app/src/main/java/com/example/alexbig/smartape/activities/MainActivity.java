@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
         addFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
             }
         });
         quizListFragment.sortFavorites();

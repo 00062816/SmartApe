@@ -57,6 +57,9 @@ public class LoginActivity extends AppCompatActivity {
         progressBarLogin = findViewById(R.id.progressBar_login_loading);
         signInTextView = findViewById(R.id.textView_login_signIn);
 
+        progressBarLogin.setVisibility(View.GONE);
+        mainContainer.setVisibility(View.VISIBLE);
+
         QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         apiRequest = new APIRequest(this, quizViewModel);
 

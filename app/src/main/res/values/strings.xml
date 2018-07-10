@@ -59,9 +59,13 @@
     <string name="text_sign_in_to_smartape">Sign in to SmartApe</string>
     <string name="text_button_sign_in">SIGN IN</string>
     <string name="text_email_address">Email address</string>
+<<<<<<< HEAD
+    <string name="text_successful_login">Login successful</string>
+=======
     <string name="text_broadcast_item">Broadcast</string>
     <string name="text_finish">Finish</string>
 
+>>>>>>> master
     <string-array name="trending_options">
         <item>Month</item>
         <item>Week</item>
