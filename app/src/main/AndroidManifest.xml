@@ -29,6 +29,7 @@
         <activity android:name=".activities.CreateQuestionActivity"/>
         <activity android:name=".activities.SignInActivity"/>
         <activity android:name=".activities.BroadcastActivity"/>
+        <activity android:name=".activities.BroadcastResultsActivity"/>
     </application>
 
 </manifest>

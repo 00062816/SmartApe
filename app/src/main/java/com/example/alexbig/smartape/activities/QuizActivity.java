@@ -152,15 +152,19 @@ public class QuizActivity extends AppCompatActivity{
             }
         }
 
+        float grade = (numCorrect*10)/counter;
         System.out.println("CORRECT "+numCorrect+" OUT OF "+counter);
-        System.out.println("GRADE "+(numCorrect*10)/counter);
+        System.out.println("GRADE "+grade);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Results");
-        builder.setMessage("Correct: "+numCorrect+"/"+counter+"\nGrade: "+(numCorrect*10)/counter);
+        builder.setMessage("Correct: "+numCorrect+"/"+counter+"\nGrade: "+grade);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                Intent data = new Intent();
+                data.putExtra("GRADE", ""+grade);
+                setResult(1,data);
                 finish();
             }
         });
