@@ -9,12 +9,12 @@ import android.support.annotation.NonNull;
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "solucion_table")
-public class Solucion {
+public class SolucionEntity {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "_id")
     private String id;
-    @ForeignKey(entity = Pregunta.class, parentColumns = "_id", childColumns = "preguntaid",
+    @ForeignKey(entity = PreguntaEntity.class, parentColumns = "_id", childColumns = "preguntaid",
             onDelete = CASCADE)
     @ColumnInfo(name = "preguntaid")
     private String preguntaid;

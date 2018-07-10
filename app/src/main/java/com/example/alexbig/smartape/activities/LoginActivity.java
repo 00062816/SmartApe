@@ -57,6 +57,9 @@ public class LoginActivity extends AppCompatActivity {
         progressBarLogin = findViewById(R.id.progressBar_login_loading);
         signInTextView = findViewById(R.id.textView_login_signIn);
 
+        progressBarLogin.setVisibility(View.GONE);
+        mainContainer.setVisibility(View.VISIBLE);
+
         QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         apiRequest = new APIRequest(this, quizViewModel);
 
@@ -72,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void Click() {
         if (usuario.getText().toString().equals("") || contraseña.getText().toString().equals("")) {
-            Toast.makeText(this, "Debes completar todos los campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "@string/text_complete_fields", Toast.LENGTH_SHORT).show();
 
         } else {
             mainContainer.setVisibility(View.GONE);

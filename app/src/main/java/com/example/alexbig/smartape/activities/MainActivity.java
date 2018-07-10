@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private QuizListFragment quizListFragment;
     private ViewPagerAdapter viewPagerAdapter;
-    private FloatingActionButton addFAB;
     private APIRequest apiRequest;
     private QuizViewModel quizViewModel;
 
@@ -64,13 +63,21 @@ public class MainActivity extends AppCompatActivity {
         quizListFragment = new QuizListFragment();
         quizListFragment.setApiRequest(apiRequest);
 
-        addFAB = findViewById(R.id.addFAB);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(fragmentManager);
         viewPager.setAdapter(viewPagerAdapter);
         viewPagerAdapter.addFragment(quizListFragment, getString(R.string.tab_quizzes));
         tabLayout.setupWithViewPager(viewPager);
+
+        FloatingActionButton addFAB = findViewById(R.id.floatingActionButton_dashboard_addQuiz);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setDrawer() {
@@ -100,6 +107,10 @@ public class MainActivity extends AppCompatActivity {
                         openBroadcastActivity();
                         break;
 
+                    case R.id.submenu_donate_item:
+                        donateActivity();
+                        break;
+
                     case R.id.submenu_logout:
                         logoutButtonClicked();
                         break;
@@ -111,47 +122,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openQuizzes(){
-        addFAB.setVisibility(View.INVISIBLE);
-        addFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         quizListFragment.sortAll();
     }
 
     private void openFavorites() {
-        addFAB.setVisibility(View.INVISIBLE);
-        addFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         quizListFragment.sortFavorites();
     }
 
     private void openSaved() {
-        addFAB.setVisibility(View.INVISIBLE);
-        addFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         quizListFragment.sortSaved();
     }
 
     private void openMyQuizzes() {
-        addFAB.setVisibility(View.VISIBLE);
-        addFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
-                startActivity(intent);
-            }
-        });
         quizListFragment.sortMyQuizzes();
     }
 
@@ -160,6 +142,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void donateActivity(){
+        Intent intentD = new Intent(this, DonateActivity.class);
+        startActivity(intentD);
+
+    }
     public void logoutButtonClicked(){
         SharedPreferences sharedPreferences = this.getSharedPreferences("logged", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
