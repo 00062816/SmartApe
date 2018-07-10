@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.activities.LoginActivity;
@@ -11,6 +13,7 @@ import com.example.alexbig.smartape.activities.MainActivity;
 import com.example.alexbig.smartape.api.deserializers.QuestionDeserializer;
 import com.example.alexbig.smartape.api.deserializers.QuizDeserializer;
 import com.example.alexbig.smartape.api.deserializers.TokenDeserializer;
+import com.example.alexbig.smartape.database.entities.QuizEntity;
 import com.example.alexbig.smartape.database.viewmodels.QuestionViewModel;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.models.Question;
@@ -36,13 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class APIRequest {
     private static String token = "";
     private SmartApeAPI smartApeAPI;
-    private QuizViewModel quizViewModel;
     private Context context;
-
-    public APIRequest(Context context, QuizViewModel quizViewModel){
-        this.context = context;
-        this.quizViewModel = quizViewModel;
-    }
 
     public APIRequest(Context context){
         this.context = context;
@@ -65,14 +62,14 @@ public class APIRequest {
         SharedPreferences sharedPreferences = context.getSharedPreferences("logged", Context.MODE_PRIVATE);
         if (sharedPreferences.contains("token")){
             token = sharedPreferences.getString("token", null);
-            downloadQuizzes();
+            //downloadQuizzes();
             return true;
         }else{
             return false;
         }
     }
 
-    public void login(String username, String password){
+    public void login(String username, String password, ProgressBar progressBar, RelativeLayout relativeLayout){
         Gson gson = new GsonBuilder().registerTypeAdapter(String.class, new TokenDeserializer()).create();
         createAPIClient(gson);
         Call<String> login = smartApeAPI.login(username, password);
@@ -89,22 +86,22 @@ public class APIRequest {
                     editor.putString("token", token);
                     editor.commit();
 
-                    downloadQuizzes();
+                    //downloadQuizzes();
 
                     ActivityManager.openMainActivity(context);
                     ActivityManager.closeActivity(context);
-                } else if (response.code() == 404) {
+                }else if (response.code() == 404) {
                     Toaster.makeToast(context, "No user found");
-                    ActivityManager.closeActivity(context);
-                    ActivityManager.openLoginActivity(context);
+                    progressBar.setVisibility(View.GONE);
+                    relativeLayout.setVisibility(View.VISIBLE);
                 } else if(response.code() == 500){
                     Toaster.makeToast(context, "There was a problem finding the user");
-                    ActivityManager.closeActivity(context);
-                    ActivityManager.openLoginActivity(context);
+                    progressBar.setVisibility(View.GONE);
+                    relativeLayout.setVisibility(View.VISIBLE);
                 } else {
                     Toaster.makeToast(context, "Error: check later");
-                    ActivityManager.closeActivity(context);
-                    ActivityManager.openLoginActivity(context);
+                    progressBar.setVisibility(View.GONE);
+                    relativeLayout.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -117,7 +114,7 @@ public class APIRequest {
         });
     }
 
-    public void signIn(String email, String password){
+    public void signIn(String email, String password, ProgressBar progressBar, RelativeLayout relativeLayout){
         createAPIClient(new Gson());
         Call<Void> signIn = smartApeAPI.signIn(email, password);
         signIn.enqueue(new Callback<Void>() {
@@ -126,7 +123,19 @@ public class APIRequest {
                 System.out.println(response.code());
 
                 if (response.code() == 200){
-                    login(email, password);
+                    login(email, password, progressBar, relativeLayout);
+                }else if (response.code() == 404) {
+                    Toaster.makeToast(context, "No user found");
+                    progressBar.setVisibility(View.GONE);
+                    relativeLayout.setVisibility(View.VISIBLE);
+                } else if(response.code() == 500){
+                    Toaster.makeToast(context, "There was a problem finding the user");
+                    progressBar.setVisibility(View.GONE);
+                    relativeLayout.setVisibility(View.VISIBLE);
+                } else {
+                    Toaster.makeToast(context, "Error: check later");
+                    progressBar.setVisibility(View.GONE);
+                    relativeLayout.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -139,7 +148,7 @@ public class APIRequest {
         });
     }
 
-    public void downloadQuizzes(){
+    public void downloadQuizzes(QuizViewModel quizViewModel){
         Gson gson = new GsonBuilder().registerTypeAdapter(Quiz.class, new QuizDeserializer()).create();
         createAPIClient(gson);
         Call<List<Quiz>> getQuizzes = smartApeAPI.getQuizzes();
@@ -148,9 +157,28 @@ public class APIRequest {
             public void onResponse(Call<List<Quiz>> call, retrofit2.Response<List<Quiz>> response) {
                 List<Quiz> quizList = response.body();
                 if (quizList != null) {
-                    quizViewModel.insertQuizzes(quizList);
+                    for (Quiz quiz : quizList){
+                        QuizEntity quizEntity = new QuizEntity();
+
+                        quizEntity.setId(quiz.getId());
+                        quizEntity.setCreador(quiz.getCreator());
+                        quizEntity.setCategoria(quiz.getCategory());
+                        quizEntity.setTitulo(quiz.getTitle());
+                        quizEntity.setDescripcion(quiz.getDescription());
+                        quizEntity.setTiempo_limite(quiz.getTimeLimit());
+                        quizEntity.setCreated_date(quiz.getCreated_date());
+                        quizEntity.setEstado(quiz.getStatus());
+                        quizEntity.setTotal_questions(quiz.getNumQuestions());
+                        quizEntity.setResueltos(quiz.getResueltos());
+                        quizEntity.setAprobados(quiz.getAprobados());
+                        quizEntity.setReprobados(quiz.getReprobados());
+                        quizEntity.setVistos(quiz.getVistos());
+                        quizEntity.setGuardados(quiz.getGuardados());
+                        quizEntity.setFavoritos(quiz.getFavoritos());
+
+                        quizViewModel.insert(quizEntity);
+                    }
                 }
-                System.out.println("QUIZZES DOWNLOADED "+quizList);
             }
 
             @Override
@@ -194,7 +222,7 @@ public class APIRequest {
         uploadQuiz.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
-                quizViewModel.insertQuiz(quiz);
+
             }
 
             @Override

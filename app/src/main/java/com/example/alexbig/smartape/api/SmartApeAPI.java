@@ -26,6 +26,7 @@ public interface SmartApeAPI {
     @GET("/quiz")
     Call<List<Quiz>> getQuizzes();
 
+
     @GET("/preguntas/{questionId}")
     Call<Question> getQuestion(@Path("questionId") String questionId);
 

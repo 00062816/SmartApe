@@ -55,7 +55,7 @@ public class AddQuestionsActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 quiz.setQuestions(questionViewModel.getQuestions().getValue());
-                quizViewModel.insertQuiz(quiz);
+                //quizViewModel.insertQuiz(quiz);
                 finish();
             }
         });

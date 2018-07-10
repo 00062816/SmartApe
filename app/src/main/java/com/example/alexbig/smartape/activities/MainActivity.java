@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        APIRequest apiRequest = new APIRequest(this, quizViewModel);
+        APIRequest apiRequest = new APIRequest(this);
 
         if (apiRequest.checkLogin()){
             setTabs();

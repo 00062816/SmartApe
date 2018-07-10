@@ -1,4 +1,4 @@
-package com.example.alexbig.smartape.database.objects;
+package com.example.alexbig.smartape.database.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -17,7 +17,7 @@ public class Pregunta {
     private String Premisa;
     @ColumnInfo(name = "tipo_pregunta")
     private int Tipo_pregunta;
-    @ForeignKey(entity = Quiz.class, parentColumns = "_id", childColumns = "quizid",
+    @ForeignKey(entity = QuizEntity.class, parentColumns = "_id", childColumns = "quizid",
             onDelete = CASCADE)
     @ColumnInfo(name = "quizid")
     private int quizid;

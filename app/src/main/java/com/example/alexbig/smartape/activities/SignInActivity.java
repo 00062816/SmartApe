@@ -49,7 +49,7 @@ public class SignInActivity extends AppCompatActivity {
                     boolean createdSuccesfully;
                     mainContainer.setVisibility(View.GONE);
                     progressBarSignIn.setVisibility(View.VISIBLE);
-                    apiRequest.signIn(emailEditText.getText().toString(), passwordEditText.getText().toString());
+                    apiRequest.signIn(emailEditText.getText().toString(), passwordEditText.getText().toString(), progressBarSignIn, mainContainer);
                 }else {
                     Toast.makeText(this, "Password don't match", Toast.LENGTH_SHORT).show();
                 }

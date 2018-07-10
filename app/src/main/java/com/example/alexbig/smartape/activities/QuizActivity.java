@@ -44,7 +44,7 @@ public class QuizActivity extends AppCompatActivity{
         QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         QuestionViewModel questionViewModel = ViewModelProviders.of(this).get(QuestionViewModel.class);
         answerViewModel = ViewModelProviders.of(this).get(AnswerViewModel.class);
-        APIRequest apiRequest = new APIRequest(this, quizViewModel);
+        APIRequest apiRequest = new APIRequest(this);
 
         Intent intent = getIntent();
         Quiz quiz = (Quiz)intent.getSerializableExtra("QUIZ");

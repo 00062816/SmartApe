@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         mainContainer.setVisibility(View.VISIBLE);
 
         QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        apiRequest = new APIRequest(this, quizViewModel);
+        apiRequest = new APIRequest(this);
 
         boton.setOnClickListener(v -> Click());
         signInTextView.setOnClickListener(v -> ClickedSignIn());
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             mainContainer.setVisibility(View.GONE);
             progressBarLogin.setVisibility(View.VISIBLE);
-            apiRequest.login(usuario.getText().toString(), contraseña.getText().toString());
+            apiRequest.login(usuario.getText().toString(), contraseña.getText().toString(), progressBarLogin, mainContainer);
         }
 
     }

@@ -8,6 +8,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import org.json.JSONArray;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,57 +19,81 @@ public class QuizDeserializer implements JsonDeserializer<Quiz>{
     @Override
     public Quiz deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         Quiz quiz = new Quiz();
-        JsonObject jsonObject = json.getAsJsonObject();
-        System.out.println("QUIZ JSON "+jsonObject.toString());
+        List<String> questionList = new ArrayList<>();
 
-        String title = jsonObject.get("Titulo").getAsString();
-        if (title != null){
-            quiz.setTitle(title);
-        }else{
+        JsonObject jsonObject = json.getAsJsonObject();
+
+        if (jsonObject.get("_id") != null){
+            quiz.setId(jsonObject.get("_id").getAsString());
+        }else {
+            quiz.setId("");
+        }
+
+        if (jsonObject.get("Titulo") != null){
+            quiz.setTitle(jsonObject.get("Titulo").getAsString());
+        }else {
             quiz.setTitle("");
         }
 
-        String description = jsonObject.get("Descripcion").getAsString();
-        if (description != null){
-            quiz.setDescription(description);
-        }else{
-            quiz.setDescription("");
-        }
-
-        String creator = jsonObject.get("Creador").getAsString();
-        if (creator != null){
-            quiz.setCreator(creator);
-        }else{
-            quiz.setCreator("");
-        }
-
-        int status = jsonObject.get("Estado").getAsInt();
-        quiz.setStatus(status);
-
-        String timeLimit = jsonObject.get("Tiempo_limite").getAsString();
-        if (timeLimit != null){
-            quiz.setTimeLimit(timeLimit);
-        }else{
-            quiz.setTimeLimit("");
-        }
-
-        String category = jsonObject.get("Categoria").getAsString();
-        if (category != null){
-            quiz.setCategory(category);
-        }else{
+        if (jsonObject.get("Categoria") != null){
+            quiz.setCategory(jsonObject.get("Categoria").getAsString());
+        }else {
             quiz.setCategory("");
         }
 
-        JsonArray array = jsonObject.getAsJsonArray("Preguntas");
-        if (array != null) {
-            List<String> questions = new ArrayList<>();
-            for (int i = 0; i < array.size(); i++) {
-                questions.add(array.get(i).getAsString());
-            }
-            quiz.setQuestionsIds(questions);
-        }else{
-            quiz.setQuestionsIds(new ArrayList<String>());
+        if (jsonObject.get("Descripcion") != null){
+            quiz.setDescription(jsonObject.get("Descripcion").getAsString());
+        }else {
+            quiz.setDescription("");
         }
+
+        if (jsonObject.get("Estado") != null){
+            quiz.setStatus(jsonObject.get("Estado").getAsInt());
+        }else {
+            quiz.setStatus(0);
+        }
+
+        if (jsonObject.get("Creador") != null){
+            quiz.setCreator(jsonObject.get("Creador").getAsString());
+        }else {
+            quiz.setCreator("");
+        }
+
+        if (jsonObject.get("Tiempo_limite") != null){
+            quiz.setTimeLimit(jsonObject.get("Tiempo_limite").getAsString());
+        }else {
+            quiz.setTimeLimit("");
+        }
+
+        if (jsonObject.get("Total_preguntas") != null){
+            quiz.setNumQuestions(jsonObject.get("Total_preguntas").getAsInt());
+        }else {
+            quiz.setNumQuestions(0);
+        }
+
+        if (jsonObject.get("Fecha_creacion") != null){
+            quiz.setCreated_date(jsonObject.get("Fecha_creacion").getAsString());
+        }else {
+            quiz.setCreated_date("");
+        }
+
+        JsonArray questionsJsonArray = jsonObject.get("Preguntas").getAsJsonArray();
+
+        for (JsonElement jsonElement : questionsJsonArray){
+
+            questionList.add(jsonElement.getAsString());
+
+        }
+
+        quiz.setQuestionsIds(questionList);
+
+        JsonObject socialElement = jsonObject.get("Elementos_sociales").getAsJsonObject();
+        quiz.setResueltos(socialElement.get("Resueltos").getAsLong());
+        quiz.setAprobados(socialElement.get("Aprobados").getAsLong());
+        quiz.setReprobados(socialElement.get("Reprobados").getAsLong());
+        quiz.setVistos(socialElement.get("Vistos").getAsLong());
+        quiz.setGuardados(socialElement.get("Guardados").getAsLong());
+        quiz.setFavoritos(socialElement.get("Favoritos").getAsLong());
 
         return quiz;
     }
