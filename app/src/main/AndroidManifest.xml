@@ -29,11 +29,7 @@
         <activity android:name=".activities.CreateQuestionActivity"/>
         <activity android:name=".activities.SignInActivity"/>
         <activity android:name=".activities.BroadcastActivity"/>
-<<<<<<< HEAD
         <activity android:name=".activities.DonateActivity"/>
-=======
-        <activity android:name=".activities.BroadcastResultsActivity"/>
->>>>>>> parent of ef98964... Correccion de errores y funcionalidad para editar y quitar preguntas y respuestas
     </application>
 
 </manifest>

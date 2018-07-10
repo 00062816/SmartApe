@@ -18,12 +18,14 @@ import com.example.alexbig.smartape.database.viewmodels.QuestionViewModel;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.models.Question;
 import com.example.alexbig.smartape.models.Quiz;
+import com.example.alexbig.smartape.utils.Toaster;
 
 import java.util.List;
 
 public class AddQuestionsActivity extends AppCompatActivity{
 
     public static QuestionViewModel questionViewModel;
+    public static QuestionAdapter questionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,18 @@ public class AddQuestionsActivity extends AppCompatActivity{
         RecyclerView recyclerView = findViewById(R.id.recyclerView_addQuestion_questions);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        QuestionAdapter questionAdapter = new QuestionAdapter(this);
+        questionAdapter = new QuestionAdapter(this) {
+            @Override
+            public void onClickEdit(int position) {
+                Intent intent = new Intent(getApplicationContext(), CreateQuestionActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("QUESTION", questionViewModel.getQuestions().getValue().get(position));
+                bundle.putInt("POSITION", position);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        };
+
         recyclerView.setAdapter(questionAdapter);
         recyclerView.setHasFixedSize(true);
 
@@ -54,6 +67,11 @@ public class AddQuestionsActivity extends AppCompatActivity{
         createButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                if (questionViewModel.getQuestions().getValue().isEmpty()){
+                    Toaster.makeToast(getApplicationContext(), "Quiz must have at least one question");
+                    return;
+                }
+
                 quiz.setQuestions(questionViewModel.getQuestions().getValue());
                 //quizViewModel.insertQuiz(quiz);
                 finish();
