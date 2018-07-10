@@ -36,6 +36,7 @@ public class QuizActivity extends AppCompatActivity{
     private AnswerAdapter answerAdapter;
     private int counter = 0;
 
+
     @Override
     public void onCreate(Bundle savedInstanceBundle){
         super.onCreate(savedInstanceBundle);
