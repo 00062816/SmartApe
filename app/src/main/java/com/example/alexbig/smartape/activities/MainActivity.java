@@ -100,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
                         openBroadcastActivity();
                         break;
 
+                    case R.id.submenu_donate_item:
+                        donateActivity();
+                        break;
+
                     case R.id.submenu_logout:
                         logoutButtonClicked();
                         break;
@@ -159,6 +163,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void donateActivity(){
+        Intent intentD = new Intent(this, DonateActivity.class);
+        startActivity(intentD);
+
+    }
     public void logoutButtonClicked(){
         SharedPreferences sharedPreferences = this.getSharedPreferences("logged", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

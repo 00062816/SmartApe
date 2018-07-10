@@ -67,6 +67,7 @@
     <string name="text_email_address">Email address</string>
     <string name="text_successful_login">Login successful</string>
     <string name="text_broadcast_item">Broadcast</string>
+    <string name="text_coming_soon">Coming soon</string>
     <string name="text_finish">Finish</string>
     <string-array name="trending_options">
         <item>Month</item>
