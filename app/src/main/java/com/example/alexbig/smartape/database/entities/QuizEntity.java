@@ -1,4 +1,4 @@
-package com.example.alexbig.smartape.database.objects;
+package com.example.alexbig.smartape.database.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -9,7 +9,9 @@ import android.support.annotation.NonNull;
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "quiz_table")
-public class Quiz {
+public class QuizEntity {
+
+
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "_id")
@@ -23,13 +25,15 @@ public class Quiz {
     @ColumnInfo(name = "titulo")
     private String Titulo;
     @ColumnInfo(name = "descripcion")
-    private Integer Descripcion;
+    private String Descripcion;
     @ColumnInfo(name = "tiempo_limite")
     private String Tiempo_limite;
     @ColumnInfo(name = "created_date")
     private String Created_date;
-    @ColumnInfo(name = "time_date")
-    private long Time_date;
+    @ColumnInfo(name = "status")
+    private int Estado;
+    @ColumnInfo(name = "Total_preguntas")
+    private int Total_questions;
     @ColumnInfo(name = "resueltos")
     private long Resueltos;
     @ColumnInfo(name = "aprobados")
@@ -48,108 +52,116 @@ public class Quiz {
         return id;
     }
 
-    public String getCreador() {
-        return Creador;
-    }
-
-    public String getCategoria() {
-        return Categoria;
-    }
-
-    public String getTitulo() {
-        return Titulo;
-    }
-
-    public Integer getDescripcion() {
-        return Descripcion;
-    }
-
-    public String getTiempo_limite() {
-        return Tiempo_limite;
-    }
-
-    public String getCreated_date() {
-        return Created_date;
-    }
-
-    public long getTime_date() {
-        return Time_date;
-    }
-
-    public long getResueltos() {
-        return Resueltos;
-    }
-
-    public long getAprobados() {
-        return Aprobados;
-    }
-
-    public long getReprobados() {
-        return Reprobados;
-    }
-
-    public long getVistos() {
-        return Vistos;
-    }
-
-    public long getGuardados() {
-        return Guardados;
-    }
-
-    public long getFavoritos() {
-        return Favoritos;
-    }
-
     public void setId(@NonNull String id) {
         this.id = id;
+    }
+
+    public String getCreador() {
+        return Creador;
     }
 
     public void setCreador(String creador) {
         Creador = creador;
     }
 
+    public String getCategoria() {
+        return Categoria;
+    }
+
     public void setCategoria(String categoria) {
         Categoria = categoria;
+    }
+
+    public String getTitulo() {
+        return Titulo;
     }
 
     public void setTitulo(String titulo) {
         Titulo = titulo;
     }
 
-    public void setDescripcion(Integer descripcion) {
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
         Descripcion = descripcion;
+    }
+
+    public String getTiempo_limite() {
+        return Tiempo_limite;
     }
 
     public void setTiempo_limite(String tiempo_limite) {
         Tiempo_limite = tiempo_limite;
     }
 
+    public String getCreated_date() {
+        return Created_date;
+    }
+
     public void setCreated_date(String created_date) {
         Created_date = created_date;
     }
 
-    public void setTime_date(long time_date) {
-        Time_date = time_date;
+    public int getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(int estado) {
+        Estado = estado;
+    }
+
+    public int getTotal_questions() {
+        return Total_questions;
+    }
+
+    public void setTotal_questions(int total_questions) {
+        Total_questions = total_questions;
+    }
+
+    public long getResueltos() {
+        return Resueltos;
     }
 
     public void setResueltos(long resueltos) {
         Resueltos = resueltos;
     }
 
+    public long getAprobados() {
+        return Aprobados;
+    }
+
     public void setAprobados(long aprobados) {
         Aprobados = aprobados;
+    }
+
+    public long getReprobados() {
+        return Reprobados;
     }
 
     public void setReprobados(long reprobados) {
         Reprobados = reprobados;
     }
 
+    public long getVistos() {
+        return Vistos;
+    }
+
     public void setVistos(long vistos) {
         Vistos = vistos;
     }
 
+    public long getGuardados() {
+        return Guardados;
+    }
+
     public void setGuardados(long guardados) {
         Guardados = guardados;
+    }
+
+    public long getFavoritos() {
+        return Favoritos;
     }
 
     public void setFavoritos(long favoritos) {
