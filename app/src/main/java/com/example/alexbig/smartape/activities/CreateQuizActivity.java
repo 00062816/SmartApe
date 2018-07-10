@@ -37,7 +37,7 @@ public class CreateQuizActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 if (titleEditText.getText().toString().equals("")){
-                    Toaster.makeToast(getApplicationContext(), "Title must not be empty");
+                    Toaster.makeToast(getApplicationContext(), getString(R.string.text_empty_title_error));
                     return;
                 }
 

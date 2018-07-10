@@ -162,9 +162,9 @@ public class QuizActivity extends AppCompatActivity{
         System.out.println("GRADE "+grade);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Results");
-        builder.setMessage("Correct: "+numCorrect+"/"+counter+"\nGrade: "+grade);
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setTitle(R.string.text_result);
+        builder.setMessage(getString(R.string.text_correct)+": "+numCorrect+"/"+counter+"\n"+getString(R.string.text_grade)+": "+grade);
+        builder.setPositiveButton(R.string.text_ok_button, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 Intent data = new Intent();

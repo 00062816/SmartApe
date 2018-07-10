@@ -59,13 +59,34 @@
     <string name="text_sign_in_to_smartape">Sign in to SmartApe</string>
     <string name="text_button_sign_in">SIGN IN</string>
     <string name="text_email_address">Email address</string>
-<<<<<<< HEAD
     <string name="text_successful_login">Login successful</string>
-=======
     <string name="text_broadcast_item">Broadcast</string>
     <string name="text_finish">Finish</string>
+    <string name="text_cancel_button">Cancel</string>
+    <string name="text_ok_button">OK</string>
+    <string name="text_edit_answer">Edit answer</string>
+    <string name="text_new_answer">New answer</string>
+    <string name="text_remove_button">Remove</string>
+    <string name="text_empty_answer_error">Answer must not be empty</string>
+    <string name="text_update_question">Update question</string>
+    <string name="text_empty_premise_error">Question premise must not be empty</string>
+    <string name="text_empty_answers_error">There must be at least one answer</string>
+    <string name="text_average">Average</string>
+    <string name="text_group_created">Group created</string>
+    <string name="text_no_groups_found">No groups found</string>
+    <string name="text_error_groups">Error searching groups</string>
+    <string name="text_connected">Connected</string>
+    <string name="text_searching">Searching…</string>
+    <string name="text_connecting">Connecting…</string>
+    <string name="text_empty_questions_error">Quiz must have at least one question</string>
+    <string name="text_empty_title_error">Title must not be empty</string>
+    <string name="text_empty_fields_error">Debes completar todos los campos</string>
+    <string name="text_waiting_results">Waiting for results</string>
+    <string name="text_available_quiz_broadcasts">Available Quiz Broadcasts</string>
+    <string name="text_result">Results</string>
+    <string name="text_correct">Correct</string>
+    <string name="text_grade">Grade</string>
 
->>>>>>> master
     <string-array name="trending_options">
         <item>Month</item>
         <item>Week</item>

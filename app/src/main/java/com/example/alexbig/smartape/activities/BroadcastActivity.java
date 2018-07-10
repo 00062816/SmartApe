@@ -108,7 +108,7 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
         wroupService.registerService(quiz.getTitle(), new ServiceRegisteredListener() {
             @Override
             public void onSuccessServiceRegistered() {
-                Toaster.makeToast(getApplicationContext(), "Group created");
+                Toaster.makeToast(getApplicationContext(), getString(R.string.text_group_created));
                 Intent intent = new Intent(getApplicationContext(), BroadcastResultsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("QUIZ", quiz);
@@ -126,7 +126,7 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
     private void findGroups(){
         final ProgressDialog progressDialog = new ProgressDialog(BroadcastActivity.this);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Searching...");
+        progressDialog.setMessage(getString(R.string.text_searching));
         progressDialog.show();
 
         groups.clear();
@@ -151,20 +151,20 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
                 devices = serviceDevices;
 
                 if (serviceDevices.isEmpty()) {
-                    Toaster.makeToast(getApplicationContext(), "No groups found");
+                    Toaster.makeToast(getApplicationContext(), getString(R.string.text_no_groups_found));
                 }
             }
 
             @Override
             public void onError(WiFiP2PError wiFiP2PError) {
-               Toaster.makeToast(getApplicationContext(), "Error searching groups");
+               Toaster.makeToast(getApplicationContext(), getString(R.string.text_error_groups));
             }
         });
     }
 
     private void connectTo(WroupServiceDevice serviceDevice){
         ProgressDialog progressDialog = new ProgressDialog(BroadcastActivity.this);
-        progressDialog.setMessage("Connecting...");
+        progressDialog.setMessage(getString(R.string.text_connecting));
         progressDialog.setIndeterminate(true);
         progressDialog.show();
 
@@ -172,7 +172,7 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
             @Override
             public void onServiceConnected(WroupDevice serviceDevice) {
                 progressDialog.dismiss();
-                Toaster.makeToast(getApplicationContext(), "Connected");
+                Toaster.makeToast(getApplicationContext(), getString(R.string.text_connected));
             }
         });
     }
@@ -187,7 +187,7 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
                     if (messageWrapper.getMessage().contains("{")) {
                         openQuiz(JsonConverter.toQuiz(messageWrapper.getMessage()));
                     }else{
-                        System.out.println("GRADE RECEIVED "+messageWrapper.getMessage());
+
                     }
                 }
             }

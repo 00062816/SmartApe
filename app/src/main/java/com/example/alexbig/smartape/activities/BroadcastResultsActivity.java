@@ -81,7 +81,7 @@ public class BroadcastResultsActivity extends AppCompatActivity implements DataR
                     average += f;
                 }
                 average /= results.size();
-                textView.setText("Average " + average);
+                textView.setText(getString(R.string.text_average)+": "+average);
             }
         });
     }

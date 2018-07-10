@@ -68,7 +68,7 @@ public class AddQuestionsActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 if (questionViewModel.getQuestions().getValue().isEmpty()){
-                    Toaster.makeToast(getApplicationContext(), "Quiz must have at least one question");
+                    Toaster.makeToast(getApplicationContext(), getString(R.string.text_empty_questions_error));
                     return;
                 }
 

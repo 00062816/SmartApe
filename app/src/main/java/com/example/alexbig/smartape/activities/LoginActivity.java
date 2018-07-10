@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void Click() {
         if (usuario.getText().toString().equals("") || contraseña.getText().toString().equals("")) {
-            Toast.makeText(this, "Debes completar todos los campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.text_empty_fields_error, Toast.LENGTH_SHORT).show();
 
         } else {
             mainContainer.setVisibility(View.GONE);

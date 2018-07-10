@@ -42,7 +42,6 @@ public class CreateQuestionActivity extends AppCompatActivity{
         answerViewModel = ViewModelProviders.of(this).get(AnswerViewModel.class);
 
         EditText questionEditText = findViewById(R.id.edittext_createQuestion_premise);
-        Spinner typeSpinner = findViewById(R.id.spinner_createQuestion_category);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView_createQuestion_answers);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -77,15 +76,18 @@ public class CreateQuestionActivity extends AppCompatActivity{
         });
 
         Button createQuestion = findViewById(R.id.button_createQuestion_create);
+        if (edit){
+           createQuestion.setText(R.string.text_update_question);
+        }
         createQuestion.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 if (questionEditText.getText().toString().equals("")){
-                    Toaster.makeToast(getApplicationContext(), "Question premise must not be empty");
+                    Toaster.makeToast(getApplicationContext(), getString(R.string.text_empty_premise_error));
                     return;
                 }
                 if (adapter.getAnswerList().isEmpty()){
-                    Toaster.makeToast(getApplicationContext(), "There must be at least one answer");
+                    Toaster.makeToast(getApplicationContext(), getString(R.string.text_empty_answers_error));
                     return;
                 }
 
@@ -114,16 +116,16 @@ public class CreateQuestionActivity extends AppCompatActivity{
 
     private void showAnswerDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("New answer");
+        builder.setTitle(R.string.text_new_answer);
 
         final EditText input = new EditText(this);
         builder.setView(input);
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.text_ok_button, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (input.getText().toString().equals("")){
-                    Toaster.makeToast(getApplicationContext(), "Answer must not be empty");
+                    Toaster.makeToast(getApplicationContext(), getString(R.string.text_empty_answer_error));
                     return;
                 }
 
@@ -132,7 +134,7 @@ public class CreateQuestionActivity extends AppCompatActivity{
                 answerViewModel.insertAnswer(answer);
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.text_cancel_button, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
@@ -143,17 +145,17 @@ public class CreateQuestionActivity extends AppCompatActivity{
 
     private void showAnswerDialog(Answer answer){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Edit answer");
+        builder.setTitle(R.string.text_edit_answer);
 
         final EditText input = new EditText(this);
         input.setText(answer.getText());
         builder.setView(input);
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.text_ok_button, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (input.getText().toString().equals("")){
-                    Toaster.makeToast(getApplicationContext(), "Answer must not be empty");
+                    Toaster.makeToast(getApplicationContext(), getString(R.string.text_empty_answer_error));
                     return;
                 }
 
@@ -161,7 +163,7 @@ public class CreateQuestionActivity extends AppCompatActivity{
                 adapter.notifyDataSetChanged();
             }
         });
-        builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.text_remove_button, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 answerViewModel.deleteAnswer(answer);
