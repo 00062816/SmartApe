@@ -3,7 +3,9 @@ package com.example.alexbig.smartape.activities;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -16,6 +18,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.abemart.wroup.common.WiFiDirectBroadcastReceiver;
+import com.abemart.wroup.common.WiFiP2PInstance;
 import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.adapters.ViewPagerAdapter;
 import com.example.alexbig.smartape.api.APIRequest;
@@ -38,13 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        APIRequest apiRequest = new APIRequest(this, quizViewModel);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (apiRequest.checkLogin()){
+        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        APIRequest apiRequest = new APIRequest(this, quizViewModel);
 
+        if (apiRequest.checkLogin()){
             setTabs();
             setDrawer();
 
@@ -90,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.menu_myquizzes_item:
                         openMyQuizzes();
+                        break;
+
+                    case R.id.menu_broadcast_item:
+                        openBroadcastActivity();
                         break;
 
                     case R.id.submenu_logout:
@@ -145,6 +153,12 @@ public class MainActivity extends AppCompatActivity {
         });
         quizListFragment.sortMyQuizzes();
     }
+
+    public void openBroadcastActivity(){
+        Intent intent = new Intent(this, BroadcastActivity.class);
+        startActivity(intent);
+    }
+
     public void logoutButtonClicked(){
         SharedPreferences sharedPreferences = this.getSharedPreferences("logged", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
