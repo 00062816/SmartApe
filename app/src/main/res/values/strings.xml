@@ -6,7 +6,7 @@
     <string name="text_check_later">Error: Check Later</string>
     <string name="text_there_was_a_problem">There was a problem finding the user</string>
     <string name="text_no_user_found">No user found</string>
-    <string name="text_nice_login">Log succesfully</string>
+    <string name="text_nice_login">Log successfully</string>
     <string name="text_complete_fields">You must complete all fields</string>
     <string name="text_hint_username">Username</string>
     <string name="text_hint_password">Password</string>
@@ -65,18 +65,12 @@
     <string name="text_sign_in_to_smartape">Sign in to SmartApe</string>
     <string name="text_button_sign_in">SIGN IN</string>
     <string name="text_email_address">Email address</string>
-<<<<<<< HEAD
 
-=======
->>>>>>> master
+
     <string name="text_successful_login">Login successful</string>
     <string name="text_broadcast_item">Broadcast</string>
     <string name="text_coming_soon">Coming soon</string>
     <string name="text_finish">Finish</string>
-<<<<<<< HEAD
-
-=======
->>>>>>> master
     <string-array name="trending_options">
         <item>Month</item>
         <item>Week</item>
