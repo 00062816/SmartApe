@@ -10,10 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:layout_marginTop="8dp"
         android:text="@string/text_create_your_own_quiz"
         android:textColor="@color/colorTextOnAccent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="32dp"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -74,6 +74,49 @@
             android:maxLines="5"
             android:padding="6dp"
             android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/text_time_limit"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editText_createQuiz_quizLimitTimeHours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edit_text"
+                android:hint="@string/text_00"
+                android:inputType="number"
+                android:maxLength="2"
+                android:padding="8dp"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_colon"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editText_createQuiz_quizLimitTimeMinutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edit_text"
+                android:hint="@string/text_00"
+                android:inputType="number"
+                android:maxLength="2"
+                android:padding="8dp"
+                android:textSize="18sp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <Button

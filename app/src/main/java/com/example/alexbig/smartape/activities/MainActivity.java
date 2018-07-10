@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private QuizListFragment quizListFragment;
     private ViewPagerAdapter viewPagerAdapter;
+    private FloatingActionButton addFAB;
     private APIRequest apiRequest;
     private QuizViewModel quizViewModel;
 
@@ -62,21 +63,17 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         quizListFragment = new QuizListFragment();
         quizListFragment.setApiRequest(apiRequest);
+<<<<<<< HEAD
+=======
+
+        addFAB = findViewById(R.id.addFAB);
+>>>>>>> parent of ef98964... Correccion de errores y funcionalidad para editar y quitar preguntas y respuestas
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(fragmentManager);
         viewPager.setAdapter(viewPagerAdapter);
         viewPagerAdapter.addFragment(quizListFragment, getString(R.string.tab_quizzes));
         tabLayout.setupWithViewPager(viewPager);
-
-        FloatingActionButton addFAB = findViewById(R.id.floatingActionButton_dashboard_addQuiz);
-        addFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void setDrawer() {
@@ -120,7 +117,54 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+<<<<<<< HEAD
 
+=======
+    private void openQuizzes(){
+        addFAB.setVisibility(View.INVISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        quizListFragment.sortAll();
+    }
+
+    private void openFavorites() {
+        addFAB.setVisibility(View.INVISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        quizListFragment.sortFavorites();
+    }
+
+    private void openSaved() {
+        addFAB.setVisibility(View.INVISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        quizListFragment.sortSaved();
+    }
+
+    private void openMyQuizzes() {
+        addFAB.setVisibility(View.VISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
+                startActivity(intent);
+            }
+        });
+        quizListFragment.sortMyQuizzes();
+    }
+>>>>>>> parent of ef98964... Correccion de errores y funcionalidad para editar y quitar preguntas y respuestas
 
     public void openBroadcastActivity(){
         Intent intent = new Intent(this, BroadcastActivity.class);

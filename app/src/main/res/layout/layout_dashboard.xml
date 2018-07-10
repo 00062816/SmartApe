@@ -9,4 +9,17 @@
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
 
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton_dashboard_addQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_black_32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"/>
+
 </RelativeLayout>

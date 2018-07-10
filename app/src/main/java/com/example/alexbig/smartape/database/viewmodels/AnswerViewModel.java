@@ -34,10 +34,4 @@ public class AnswerViewModel extends AndroidViewModel{
     public void setAnswers(List<Answer> answerList){
         this.answers.setValue(answerList);
     }
-
-    public void deleteAnswer(Answer answer){
-        List<Answer> answerList = answers.getValue();
-        answerList.remove(answer);
-        answers.setValue(answerList);
-    }
 }

@@ -13,7 +13,6 @@ import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.api.APIRequest;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.models.Quiz;
-import com.example.alexbig.smartape.utils.Toaster;
 
 import java.util.ArrayList;
 
@@ -36,11 +35,6 @@ public class CreateQuizActivity extends AppCompatActivity{
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (titleEditText.getText().toString().equals("")){
-                    Toaster.makeToast(getApplicationContext(), "Title must not be empty");
-                    return;
-                }
-
                 quiz.setTitle(titleEditText.getText().toString());
                 quiz.setStatus(0);
                 quiz.setDescription(descriptionEditText.getText().toString());
