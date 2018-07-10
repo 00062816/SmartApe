@@ -15,30 +15,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.LoginActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".activities.CreateQuizActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".activities.QuizActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".activities.AddQuestionsActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".activities.CreateQuestionActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".activities.SignInActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".activities.BroadcastActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
-        <activity android:name=".activities.BroadcastResultsActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name=".activities.LoginActivity"/>
+        <activity android:name=".activities.CreateQuizActivity"/>
+        <activity android:name=".activities.QuizActivity"/>
+        <activity android:name=".activities.AddQuestionsActivity"/>
+        <activity android:name=".activities.CreateQuestionActivity"/>
+        <activity android:name=".activities.SignInActivity"/>
+        <activity android:name=".activities.BroadcastActivity"/>
+        <activity android:name=".activities.DonateActivity"/>
     </application>
 
 </manifest>
