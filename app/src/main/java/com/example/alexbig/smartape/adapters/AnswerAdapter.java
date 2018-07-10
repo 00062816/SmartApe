@@ -28,6 +28,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 
     public void setAnswerList(List<Answer> answerList){
         this.answerList = answerList;
+        this.notifyDataSetChanged();
     }
 
     public List<Answer> getAnswerList(){
@@ -45,25 +46,12 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
     @Override
     public void onBindViewHolder(@NonNull AnswerViewHolder holder, int position) {
         final Answer answer = answerList.get(position);
-        holder.answerTextView.setText(answer.getText());
 
-        holder.answerTextView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                answer.setText(charSequence.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
+        if (answer.isCorrect()){
+            holder.checkBox.setChecked(true);
+        }else{
+            holder.checkBox.setChecked(false);
+        }
         holder.checkBox.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -74,6 +62,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
                 }
             }
         });
+
+        //holder.numberTextView.setText(position);
+        holder.answerTextView.setText(answer.getText());
     }
 
     @Override
@@ -83,11 +74,13 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
 
     public class AnswerViewHolder extends RecyclerView.ViewHolder{
 
-        private EditText answerTextView;
+        private TextView numberTextView;
+        private TextView answerTextView;
         private CheckBox checkBox;
 
         public AnswerViewHolder(View itemView) {
             super(itemView);
+            numberTextView = itemView.findViewById(R.id.textView_recyclerCreateAnswer_answerNumber);
             answerTextView = itemView.findViewById(R.id.editText_createAnswer_answer);
             checkBox = itemView.findViewById(R.id.checkBox_createAnswer_answerCorrect);
         }

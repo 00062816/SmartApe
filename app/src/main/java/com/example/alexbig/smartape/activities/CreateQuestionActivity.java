@@ -2,9 +2,11 @@ package com.example.alexbig.smartape.activities;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,9 +21,12 @@ import com.example.alexbig.smartape.database.viewmodels.AnswerViewModel;
 import com.example.alexbig.smartape.models.Answer;
 import com.example.alexbig.smartape.models.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CreateQuestionActivity extends AppCompatActivity{
+
+    private AnswerViewModel answerViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceBundle) {
@@ -29,7 +34,7 @@ public class CreateQuestionActivity extends AppCompatActivity{
         setContentView(R.layout.layout_create_question);
 
         Question question = new Question();
-        AnswerViewModel answerViewModel = ViewModelProviders.of(this).get(AnswerViewModel.class);
+        answerViewModel = ViewModelProviders.of(this).get(AnswerViewModel.class);
 
         EditText questionEditText = findViewById(R.id.edittext_createQuestion_premise);
         Spinner typeSpinner = findViewById(R.id.spinner_createQuestion_category);
@@ -38,6 +43,7 @@ public class CreateQuestionActivity extends AppCompatActivity{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         AnswerAdapter adapter = new AnswerAdapter(this);
+        adapter.setAnswerList(new ArrayList<>());
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
@@ -45,8 +51,9 @@ public class CreateQuestionActivity extends AppCompatActivity{
         addAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adapter.getAnswerList().add(new Answer());
-                adapter.notifyDataSetChanged();
+                showAnswerDialog();
+                /*adapter.getAnswerList().add(new Answer());
+                adapter.notifyDataSetChanged();*/
             }
         });
 
@@ -56,6 +63,10 @@ public class CreateQuestionActivity extends AppCompatActivity{
             public void onClick(View view) {
                 question.setPremise(questionEditText.getText().toString());
                 question.setAnswers(adapter.getAnswerList());
+
+                for (Answer a:adapter.getAnswerList()){
+                    System.out.println("ANSWER "+a.getText()+" "+a.isCorrect());
+                }
 
                 AddQuestionsActivity.questionViewModel.insertQuestion(question);
                 finish();
@@ -68,5 +79,29 @@ public class CreateQuestionActivity extends AppCompatActivity{
                 adapter.setAnswerList(answers);
             }
         });
+    }
+
+    private void showAnswerDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("New question");
+
+        final EditText input = new EditText(this);
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Answer answer = new Answer();
+                answer.setText(input.getText().toString());
+                answerViewModel.insertAnswer(answer);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        builder.show();
     }
 }

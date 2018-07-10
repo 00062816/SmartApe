@@ -3,6 +3,10 @@
     package="com.example.alexbig.smartape">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -23,6 +27,8 @@
         <activity android:name=".activities.QuizActivity"/>
         <activity android:name=".activities.AddQuestionsActivity"/>
         <activity android:name=".activities.CreateQuestionActivity"/>
+        <activity android:name=".activities.SignInActivity"/>
+        <activity android:name=".activities.BroadcastActivity"/>
     </application>
 
 </manifest>

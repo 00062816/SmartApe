@@ -2,7 +2,12 @@ package com.example.alexbig.smartape.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.view.View;
 
+import com.example.alexbig.smartape.R;
+import com.example.alexbig.smartape.activities.LoginActivity;
+import com.example.alexbig.smartape.activities.MainActivity;
 import com.example.alexbig.smartape.api.deserializers.QuestionDeserializer;
 import com.example.alexbig.smartape.api.deserializers.QuizDeserializer;
 import com.example.alexbig.smartape.api.deserializers.TokenDeserializer;
@@ -29,7 +34,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIRequest {
-
     private static String token = "";
     private SmartApeAPI smartApeAPI;
     private QuizViewModel quizViewModel;
@@ -38,6 +42,10 @@ public class APIRequest {
     public APIRequest(Context context, QuizViewModel quizViewModel){
         this.context = context;
         this.quizViewModel = quizViewModel;
+    }
+
+    public APIRequest(Context context){
+        this.context = context;
     }
 
     private void createAPIClient(Gson gson){
@@ -73,7 +81,7 @@ public class APIRequest {
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
                 System.out.println(response.code());
                 if (response.code() == 200) {
-                    Toaster.makeToast(context, "@string/text_nice_login");
+                    Toaster.makeToast(context, "Login successful");
 
                     token = response.body();
                     SharedPreferences preferences = context.getSharedPreferences("logged", Context.MODE_PRIVATE);
@@ -86,18 +94,46 @@ public class APIRequest {
                     ActivityManager.openMainActivity(context);
                     ActivityManager.closeActivity(context);
                 } else if (response.code() == 404) {
-                    Toaster.makeToast(context, "@string/text_no_user_found");
+                    Toaster.makeToast(context, "No user found");
+                    ActivityManager.closeActivity(context);
+                    ActivityManager.openLoginActivity(context);
                 } else if(response.code() == 500){
-                    Toaster.makeToast(context, "@string/text_there_was_a_problem");
+                    Toaster.makeToast(context, "There was a problem finding the user");
+                    ActivityManager.closeActivity(context);
+                    ActivityManager.openLoginActivity(context);
                 } else {
-                    Toaster.makeToast(context, "@string/text_check_later");
+                    Toaster.makeToast(context, "Error: check later");
+                    ActivityManager.closeActivity(context);
+                    ActivityManager.openLoginActivity(context);
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 if (t instanceof SocketTimeoutException) {
-                    Toaster.makeToast(context, "@string/text_time_out");
+                    Toaster.makeToast(context, "Time out");
+                }
+            }
+        });
+    }
+
+    public void signIn(String email, String password){
+        createAPIClient(new Gson());
+        Call<Void> signIn = smartApeAPI.signIn(email, password);
+        signIn.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+                System.out.println(response.code());
+
+                if (response.code() == 200){
+                    login(email, password);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                if (t instanceof SocketTimeoutException) {
+                    Toaster.makeToast(context, "Time out");
                 }
             }
         });
@@ -112,7 +148,7 @@ public class APIRequest {
             public void onResponse(Call<List<Quiz>> call, retrofit2.Response<List<Quiz>> response) {
                 List<Quiz> quizList = response.body();
                 if (quizList != null) {
-                    //quizViewModel.insertQuizzes(quizList);
+                    quizViewModel.insertQuizzes(quizList);
                 }
                 System.out.println("QUIZZES DOWNLOADED "+quizList);
             }

@@ -1,9 +1,10 @@
 package com.example.alexbig.smartape.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Question {
+public class Question implements Serializable{
 
     private String premise;
     private int type;

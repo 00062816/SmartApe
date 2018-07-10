@@ -18,13 +18,14 @@ import com.example.alexbig.smartape.activities.QuizActivity;
 import com.example.alexbig.smartape.api.APIRequest;
 import com.example.alexbig.smartape.models.Quiz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder>{
 
     private Context context;
     private APIRequest apiRequest;
-    private List<Quiz> quizList;
+    private List<Quiz> quizList = new ArrayList<>();
 
     public QuizAdapter(Context context, APIRequest apiRequest){
         this.context = context;
@@ -32,8 +33,10 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
     }
 
     public void setQuizList(List<Quiz> quizList){
-        this.quizList = quizList;
-        this.notifyDataSetChanged();
+        if (quizList != null) {
+            this.quizList = quizList;
+            this.notifyDataSetChanged();
+        }
     }
 
     @NonNull
@@ -100,7 +103,11 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     @Override
     public int getItemCount() {
-        return quizList.size();
+        if (quizList != null){
+            return quizList.size();
+        }else {
+            return 0;
+        }
     }
 
     public class QuizViewHolder extends RecyclerView.ViewHolder{

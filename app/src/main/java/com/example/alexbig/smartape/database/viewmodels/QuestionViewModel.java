@@ -29,4 +29,8 @@ public class QuestionViewModel extends AndroidViewModel{
         questionList.add(question);
         questions.setValue(questionList);
     }
+
+    public void setQuestions(List<Question> questionList){
+        questions.setValue(questionList);
+    }
 }
