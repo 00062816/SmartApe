@@ -12,35 +12,32 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-<<<<<<< HEAD
+
 import com.example.alexbig.smartape.database.entities.Solucion;
-=======
-import com.example.alexbig.smartape.database.objects.SolucionEntity;
->>>>>>> master
 
 import java.util.List;
 
 @Dao
 public interface SolucionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(SolucionEntity... solucionEntities);
+    void insert(Solucion... solucionEntities);
 
     @Delete
-    void delete(SolucionEntity solucionEntity);
+    void delete(Solucion solucionEntity);
 
     @Update
-    void update(SolucionEntity... solucionEntities);
+    void update(Solucion... solucionEntities);
 
     @Query("DELETE FROM solucion_table")
     void DeleteAllSolucion();
 
     @Query("SELECT * FROM solucion_table WHERE _id IN (:solucionIds)")
-    List<SolucionEntity> loadAllByIds(String... solucionIds);
+    List<Solucion> loadAllByIds(String... solucionIds);
 
     @Query("SELECT * FROM solucion_table WHERE _id IN (:solucionIds)")
-    LiveData<SolucionEntity> FindOne(String solucionIds);
+    LiveData<Solucion> FindOne(String solucionIds);
 
     // Ejemplo de query para sacar las soluciones de un quiz
     @Query("SELECT * FROM solucion_table WHERE preguntaid=:sid")
-    List<SolucionEntity> findRepositoriesForPregunta(String sid);
+    List<Solucion> findRepositoriesForPregunta(String sid);
 }

@@ -12,26 +12,16 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-<<<<<<< HEAD
+
 import com.example.alexbig.smartape.database.entities.PreguntaEntity;
-=======
-import com.example.alexbig.smartape.database.objects.PreguntaEntity;
->>>>>>> master
+
 
 import java.util.List;
 
 @Dao
 public interface PreguntaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-<<<<<<< HEAD
-    void insert(PreguntaEntity... preguntas);
 
-    @Delete
-    void delete(PreguntaEntity pregunta);
-
-    @Update
-    void update(PreguntaEntity... preguntas);
-=======
     void insert(PreguntaEntity... preguntaEntities);
 
     @Delete
@@ -39,7 +29,6 @@ public interface PreguntaDao {
 
     @Update
     void update(PreguntaEntity... preguntaEntities);
->>>>>>> master
 
     @Query("DELETE FROM pregunta_table")
     void DeleteAllPreguntas();

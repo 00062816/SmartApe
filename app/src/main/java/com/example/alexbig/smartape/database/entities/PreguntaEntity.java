@@ -20,7 +20,9 @@ public class PreguntaEntity {
     @ForeignKey(entity = QuizEntity.class, parentColumns = "_id", childColumns = "quizid",
             onDelete = CASCADE)
     @ColumnInfo(name = "quizid")
-    private int quizid;
+    private String quizid;
+    @ColumnInfo(name = "fecha_creacion")
+    private String fecha_creacion;
 
     @NonNull
     public String getId() {
@@ -35,7 +37,7 @@ public class PreguntaEntity {
         return Tipo_pregunta;
     }
 
-    public int getQuizid() {
+    public String getQuizid() {
         return quizid;
     }
 
@@ -51,9 +53,15 @@ public class PreguntaEntity {
         Tipo_pregunta = tipo_pregunta;
     }
 
-    public void setQuizid(int quizid) {
+    public void setQuizid(String quizid) {
         this.quizid = quizid;
     }
 
+    public String getFecha_creacion() {
+        return fecha_creacion;
+    }
 
+    public void setFecha_creacion(String fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
 }
