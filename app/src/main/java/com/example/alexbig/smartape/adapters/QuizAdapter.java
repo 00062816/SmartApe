@@ -16,6 +16,7 @@ import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.activities.MainActivity;
 import com.example.alexbig.smartape.activities.QuizActivity;
 import com.example.alexbig.smartape.api.APIRequest;
+import com.example.alexbig.smartape.database.entities.QuizEntity;
 import com.example.alexbig.smartape.models.Quiz;
 
 import java.util.ArrayList;
@@ -25,14 +26,14 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     private Context context;
     private APIRequest apiRequest;
-    private List<Quiz> quizList = new ArrayList<>();
+    private List<QuizEntity> quizList = new ArrayList<>();
 
     public QuizAdapter(Context context, APIRequest apiRequest){
         this.context = context;
         this.apiRequest = apiRequest;
     }
 
-    public void setQuizList(List<Quiz> quizList){
+    public void setQuizList(List<QuizEntity> quizList){
         if (quizList != null) {
             this.quizList = quizList;
             this.notifyDataSetChanged();
@@ -49,13 +50,13 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull QuizAdapter.QuizViewHolder holder, int position) {
-        final Quiz quiz = quizList.get(position);
-        holder.titleTextView.setText(quiz.getTitle());
-        holder.descriptionTextView.setText(quiz.getDescription());
-        holder.userTextView.setText(quiz.getCreator());
+        final QuizEntity quiz = quizList.get(position);
+        holder.titleTextView.setText(quiz.getTitulo());
+        holder.descriptionTextView.setText(quiz.getDescripcion());
+        holder.userTextView.setText(quiz.getCreador());
 
         final CheckBox favoriteButton = holder.favoriteButton;
-        if (quiz.isFavorite()){
+       /* if (quiz.isFavorite()){
             favoriteButton.setChecked(true);
         }else{
             favoriteButton.setChecked(false);
@@ -87,14 +88,14 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
                     quiz.setSaved(false);
                 }
             }
-        });
+        });*/
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, QuizActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("QUIZ", quiz);
+                bundle.putString("QUIZ", quiz.getId());
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

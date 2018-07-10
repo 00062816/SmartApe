@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         quizListFragment = new QuizListFragment();
         quizListFragment.setApiRequest(apiRequest);
-
         addFAB = findViewById(R.id.addFAB);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
@@ -82,18 +81,22 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menu_quizzes_item:
                         openQuizzes();
+                        quizListFragment.filterQuizzes(1);
                         break;
 
                     case R.id.menu_favorite_item:
                         openFavorites();
+                        quizListFragment.filterQuizzes(2);
                         break;
 
                     case R.id.menu_saved_item:
                         openSaved();
+                        quizListFragment.filterQuizzes(3);
                         break;
 
                     case R.id.menu_myquizzes_item:
                         openMyQuizzes();
+                        quizListFragment.filterQuizzes(4);
                         break;
 
                     case R.id.menu_broadcast_item:
@@ -118,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        quizListFragment.sortAll();
+        //quizListFragment.sortAll();
     }
 
     private void openFavorites() {
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
             }
         });
-        quizListFragment.sortFavorites();
+        //quizListFragment.sortFavorites();
     }
 
     private void openSaved() {
@@ -139,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        quizListFragment.sortSaved();
+        //quizListFragment.sortSaved();
     }
 
     private void openMyQuizzes() {
@@ -151,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        quizListFragment.sortMyQuizzes();
+        //quizListFragment.sortMyQuizzes();
     }
 
     public void openBroadcastActivity(){
