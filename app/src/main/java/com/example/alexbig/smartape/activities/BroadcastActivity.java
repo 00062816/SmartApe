@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abemart.wroup.client.WroupClient;
@@ -104,32 +105,19 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
 
     private void createGroup(Quiz quiz){
         wroupService = WroupService.getInstance(getApplicationContext());
-        wroupService.setDataReceivedListener(this);
-        wroupService.registerService("Group name", new ServiceRegisteredListener() {
+        wroupService.registerService(quiz.getTitle(), new ServiceRegisteredListener() {
             @Override
             public void onSuccessServiceRegistered() {
                 Toaster.makeToast(getApplicationContext(), "Group created");
+                Intent intent = new Intent(getApplicationContext(), BroadcastResultsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("QUIZ", quiz);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
 
             @Override
             public void onErrorServiceRegistered(WiFiP2PError wiFiP2PError) {
-
-            }
-        });
-
-        wroupService.setClientConnectedListener(new ClientConnectedListener() {
-            @Override
-            public void onClientConnected(WroupDevice wroupDevice) {
-                MessageWrapper message = new MessageWrapper();
-                message.setMessage(JsonConverter.toJson(quiz));
-                message.setMessageType(MessageWrapper.MessageType.NORMAL);
-                wroupService.sendMessage(wroupDevice, message);
-            }
-        });
-
-        wroupService.setClientDisconnectedListener(new ClientDisconnectedListener() {
-            @Override
-            public void onClientDisconnected(WroupDevice wroupDevice) {
 
             }
         });
@@ -196,7 +184,11 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
             public void run() {
                 System.out.println("MESSAGE "+messageWrapper.getMessage());
                 if (messageWrapper.getMessageType() == MessageWrapper.MessageType.NORMAL) {
-                    openQuiz(JsonConverter.toQuiz(messageWrapper.getMessage()));
+                    if (messageWrapper.getMessage().contains("{")) {
+                        openQuiz(JsonConverter.toQuiz(messageWrapper.getMessage()));
+                    }else{
+                        System.out.println("GRADE RECEIVED "+messageWrapper.getMessage());
+                    }
                 }
             }
         });
@@ -207,7 +199,19 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
         Bundle bundle = new Bundle();
         bundle.putSerializable("QUIZ", quiz);
         intent.putExtras(bundle);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == 1){
+            if (resultCode == 1){
+                String grade = data.getStringExtra("GRADE");
+                MessageWrapper message = new MessageWrapper();
+                message.setMessage(grade);
+                message.setMessageType(MessageWrapper.MessageType.NORMAL);
+                wroupClient.sendMessageToServer(message);
+            }
+        }
     }
 
     @Override

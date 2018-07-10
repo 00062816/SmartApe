@@ -35,9 +35,15 @@ public class PreguntaViewModel extends AndroidViewModel{
         return preguntarepository.getAllPreguntas();
     }
 
+<<<<<<< HEAD
     public LiveData<List<PreguntaEntity>> getAllPreguntasByid(){
         return preguntarepository.getAllPreguntasByid();
     }
+=======
+    /*public LiveData<List<PreguntaEntity>> getAllPreguntasByid(){
+        return preguntarepository.getAllPreguntasByid();
+    }*/
+>>>>>>> master
 
 
 }
