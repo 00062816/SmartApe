@@ -16,12 +16,13 @@ public class QuestionDeserializer implements JsonDeserializer<PreguntaEntity>{
         PreguntaEntity question = new PreguntaEntity();
         JsonObject jsonObject = json.getAsJsonObject();
 
-        System.out.println("QUESTION JSON "+jsonObject.toString());
+        System.out.println("PREGUNTA JSON "+jsonObject.toString());
         question.setId(jsonObject.get("_id").getAsString());
         question.setPremisa(jsonObject.get("Premisa").getAsString());
         question.setTipo_pregunta(jsonObject.get("Tipo_pregunta").getAsInt());
         question.setFecha_creacion(jsonObject.get("Fecha_creacion").getAsString());
         question.setQuizid(jsonObject.get("Id_quiz").getAsString());
+
         return question;
     }
 }
