@@ -69,7 +69,12 @@ public class QuizActivity extends AppCompatActivity{
         questionTextView = findViewById(R.id.textView_answerQuestion_question);
         RecyclerView recyclerView = findViewById(R.id.recyclerView_answerQuestion_answers);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        answerAdapter = new AnswerAdapter(this);
+        answerAdapter = new AnswerAdapter(this) {
+            @Override
+            public void onItemClick(View v, int position) {
+
+            }
+        };
         answerAdapter.setAnswerList(new ArrayList<>());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(answerAdapter);
