@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.alexbig.smartape.R;
@@ -13,7 +14,7 @@ import com.example.alexbig.smartape.models.Question;
 
 import java.util.List;
 
-public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder>{
+public abstract class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder>{
 
     private Context context;
     private List<Question> questionList;
@@ -39,7 +40,24 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
         Question question = questionList.get(position);
         holder.questionTextView.setText(question.getPremise());
+
+        holder.deleteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                questionList.remove(position);
+                notifyDataSetChanged();
+            }
+        });
+
+        holder.editButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                onClickEdit(position);
+            }
+        });
     }
+
+    public abstract void onClickEdit(int position);
 
     @Override
     public int getItemCount() {
@@ -48,11 +66,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
     public class QuestionViewHolder extends RecyclerView.ViewHolder{
 
+        private ImageButton deleteButton;
+        private ImageButton editButton;
         private TextView questionTextView;
 
         public QuestionViewHolder(View itemView) {
             super(itemView);
             questionTextView = itemView.findViewById(R.id.textView_recyclerAddQuestion_question);
+            deleteButton = itemView.findViewById(R.id.imageButton_recyclerAddQuestion_deleteQuestion);
+            editButton = itemView.findViewById(R.id.imageButton_recyclerAddQuestion_editQuestion);
         }
     }
 }

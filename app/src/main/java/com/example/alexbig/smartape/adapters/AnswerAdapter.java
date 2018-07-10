@@ -17,7 +17,7 @@ import com.example.alexbig.smartape.models.Answer;
 
 import java.util.List;
 
-public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerViewHolder>{
+public abstract class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerViewHolder>{
 
     private Context context;
     private List<Answer> answerList;
@@ -63,9 +63,18 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.AnswerView
             }
         });
 
-        //holder.numberTextView.setText(position);
+        holder.numberTextView.setText(""+(position+1));
         holder.answerTextView.setText(answer.getText());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                AnswerAdapter.this.onItemClick(view, position);
+            }
+        });
     }
+
+    public abstract void onItemClick(View v, int position);
 
     @Override
     public int getItemCount() {
