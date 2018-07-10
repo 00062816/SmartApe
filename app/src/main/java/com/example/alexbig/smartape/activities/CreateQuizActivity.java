@@ -31,7 +31,7 @@ public class CreateQuizActivity extends AppCompatActivity{
 
         final Quiz quiz = new Quiz();
         final QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        APIRequest apiRequest = new APIRequest(this, quizViewModel);
+        /*APIRequest apiRequest = new APIRequest(this, quizViewModel);
 
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +55,6 @@ public class CreateQuizActivity extends AppCompatActivity{
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
     }
 }

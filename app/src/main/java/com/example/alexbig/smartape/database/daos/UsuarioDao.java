@@ -12,7 +12,7 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.example.alexbig.smartape.database.objects.Usuario;
+import com.example.alexbig.smartape.database.entities.Usuario;
 
 import java.util.List;
 

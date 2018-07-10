@@ -1,5 +1,6 @@
 package com.example.alexbig.smartape.api;
 
+import com.example.alexbig.smartape.database.entities.PreguntaEntity;
 import com.example.alexbig.smartape.models.Question;
 import com.example.alexbig.smartape.models.Quiz;
 
@@ -9,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -25,6 +27,18 @@ public interface SmartApeAPI {
 
     @GET("/quiz")
     Call<List<Quiz>> getQuizzes();
+
+    @GET("/usuario/me/guardados")
+    Call<List<Quiz>> getSavedQuizzes();
+
+    @GET("/usuario/me/favoritos")
+    Call<List<Quiz>> getFavedQuizzes();
+
+    @GET("/usuario/me/creados")
+    Call<List<Quiz>> getCreatedQuizzes();
+
+    @GET("/preguntas/obtener/{questionId}")
+    Call<List<PreguntaEntity>> getPreguntas(@Path("questionId") String questionId);
 
     @GET("/preguntas/{questionId}")
     Call<Question> getQuestion(@Path("questionId") String questionId);

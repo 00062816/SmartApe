@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Quiz implements Serializable{
 
+    private String id;
     private String category;
     private String title;
     private String creator;
@@ -13,6 +14,30 @@ public class Quiz implements Serializable{
     private String description;
     private String timeLimit;
     private int numQuestions;
+    private String created_date;
+    private long Resueltos;
+    private long Aprobados;
+    private long Reprobados;
+    private long Vistos;
+    private long Guardados;
+    private long Favoritos;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
     private boolean favorite;
     private boolean saved;
     private List<String> questionsIds = new ArrayList<>();
@@ -76,6 +101,54 @@ public class Quiz implements Serializable{
 
     public void setNumQuestions(int numQuestions) {
         this.numQuestions = numQuestions;
+    }
+
+    public long getResueltos() {
+        return Resueltos;
+    }
+
+    public void setResueltos(long resueltos) {
+        Resueltos = resueltos;
+    }
+
+    public long getAprobados() {
+        return Aprobados;
+    }
+
+    public void setAprobados(long aprobados) {
+        Aprobados = aprobados;
+    }
+
+    public long getReprobados() {
+        return Reprobados;
+    }
+
+    public void setReprobados(long reprobados) {
+        Reprobados = reprobados;
+    }
+
+    public long getVistos() {
+        return Vistos;
+    }
+
+    public void setVistos(long vistos) {
+        Vistos = vistos;
+    }
+
+    public long getGuardados() {
+        return Guardados;
+    }
+
+    public void setGuardados(long guardados) {
+        Guardados = guardados;
+    }
+
+    public long getFavoritos() {
+        return Favoritos;
+    }
+
+    public void setFavoritos(long favoritos) {
+        Favoritos = favoritos;
     }
 
     public boolean isFavorite() {

@@ -10,17 +10,29 @@ import com.example.alexbig.smartape.database.daos.QuizDao;
 import com.example.alexbig.smartape.database.daos.ResueltoDao;
 import com.example.alexbig.smartape.database.daos.SolucionDao;
 import com.example.alexbig.smartape.database.daos.UsuarioDao;
+<<<<<<< HEAD
+import com.example.alexbig.smartape.database.entities.PreguntaEntity;
+import com.example.alexbig.smartape.database.entities.QuizEntity;
+import com.example.alexbig.smartape.database.entities.Resuelto;
+import com.example.alexbig.smartape.database.entities.Solucion;
+import com.example.alexbig.smartape.database.entities.Usuario;
+=======
 import com.example.alexbig.smartape.database.objects.PreguntaEntity;
 import com.example.alexbig.smartape.database.objects.Resuelto;
 import com.example.alexbig.smartape.database.objects.Quiz;
 import com.example.alexbig.smartape.database.objects.SolucionEntity;
 import com.example.alexbig.smartape.database.objects.Usuario;
+>>>>>>> master
 
 /**
  * Created by Andres on 4/7/2018.
  */
 
+<<<<<<< HEAD
+@Database(entities = {PreguntaEntity.class, QuizEntity.class, Resuelto.class, Solucion.class, Usuario.class}, version = 1)
+=======
 @Database(entities = {PreguntaEntity.class, Quiz.class, Resuelto.class, SolucionEntity.class, Usuario.class}, version = 1)
+>>>>>>> master
 public abstract class ApesDataBase extends RoomDatabase {
     private static final String DB_NAME = "SmartApes.db";
     private static volatile ApesDataBase instance;

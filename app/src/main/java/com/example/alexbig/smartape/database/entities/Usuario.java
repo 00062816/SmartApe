@@ -1,4 +1,4 @@
-package com.example.alexbig.smartape.database.objects;
+package com.example.alexbig.smartape.database.entities;
 
 
 import android.arch.persistence.room.ColumnInfo;

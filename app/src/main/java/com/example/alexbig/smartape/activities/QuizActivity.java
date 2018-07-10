@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.adapters.AnswerAdapter;
 import com.example.alexbig.smartape.api.APIRequest;
+import com.example.alexbig.smartape.database.entities.QuizEntity;
 import com.example.alexbig.smartape.database.viewmodels.AnswerViewModel;
 import com.example.alexbig.smartape.database.viewmodels.QuestionViewModel;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
@@ -33,6 +34,8 @@ public class QuizActivity extends AppCompatActivity{
     private List<Question> currentQuestions = new ArrayList<>();
     private TextView questionTextView;
     private AnswerViewModel answerViewModel;
+    private APIRequest apiRequest;
+    private QuizViewModel quizViewModel;
     private AnswerAdapter answerAdapter;
     private int counter = 0;
 
@@ -44,13 +47,17 @@ public class QuizActivity extends AppCompatActivity{
 
         QuizViewModel quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         QuestionViewModel questionViewModel = ViewModelProviders.of(this).get(QuestionViewModel.class);
+        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
         answerViewModel = ViewModelProviders.of(this).get(AnswerViewModel.class);
-        APIRequest apiRequest = new APIRequest(this, quizViewModel);
+        APIRequest apiRequest = new APIRequest(this);
+
+
 
         Intent intent = getIntent();
-        Quiz quiz = (Quiz)intent.getSerializableExtra("QUIZ");
-        questions = quiz.getQuestions();
+        String quizid = (String)intent.getSerializableExtra("QUIZ");
+       // questions = quiz.getQuestions();
         currentQuestions = new ArrayList<>();
+        quizViewModel.getQuizzesById(quizid);
         for (Question q:questions){
             Question question = new Question();
             question.setPremise(q.getPremise());

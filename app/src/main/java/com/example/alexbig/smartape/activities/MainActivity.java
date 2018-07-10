@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        APIRequest apiRequest = new APIRequest(this, quizViewModel);
+        APIRequest apiRequest = new APIRequest(this);
 
         if (apiRequest.checkLogin()){
             setTabs();
@@ -62,7 +62,11 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         quizListFragment = new QuizListFragment();
         quizListFragment.setApiRequest(apiRequest);
+<<<<<<< HEAD
+        addFAB = findViewById(R.id.addFAB);
+=======
 
+>>>>>>> master
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(fragmentManager);
@@ -89,18 +93,22 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menu_quizzes_item:
                         openQuizzes();
+                        quizListFragment.filterQuizzes(1);
                         break;
 
                     case R.id.menu_favorite_item:
                         openFavorites();
+                        quizListFragment.filterQuizzes(2);
                         break;
 
                     case R.id.menu_saved_item:
                         openSaved();
+                        quizListFragment.filterQuizzes(3);
                         break;
 
                     case R.id.menu_myquizzes_item:
                         openMyQuizzes();
+                        quizListFragment.filterQuizzes(4);
                         break;
 
                     case R.id.menu_broadcast_item:
@@ -122,6 +130,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openQuizzes(){
+<<<<<<< HEAD
+        addFAB.setVisibility(View.INVISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //quizListFragment.sortAll();
+    }
+
+    private void openFavorites() {
+        addFAB.setVisibility(View.INVISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+        //quizListFragment.sortFavorites();
+    }
+
+    private void openSaved() {
+        addFAB.setVisibility(View.INVISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //quizListFragment.sortSaved();
+    }
+
+    private void openMyQuizzes() {
+        addFAB.setVisibility(View.VISIBLE);
+        addFAB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CreateQuizActivity.class);
+                startActivity(intent);
+            }
+        });
+        //quizListFragment.sortMyQuizzes();
+=======
         quizListFragment.sortAll();
     }
 
@@ -135,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void openMyQuizzes() {
         quizListFragment.sortMyQuizzes();
+>>>>>>> master
     }
 
     public void openBroadcastActivity(){

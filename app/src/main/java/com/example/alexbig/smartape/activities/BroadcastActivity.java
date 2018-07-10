@@ -88,15 +88,15 @@ public class BroadcastActivity extends AppCompatActivity implements DataReceived
         builder.setTitle("Select a quiz");
 
         List<String> titles = new ArrayList<>();
-        for (Quiz q:quizViewModel.getQuizzes().getValue()){
+        /*for (Quiz q:quizViewModel.getQuizzes().getValue()){
             titles.add(q.getTitle());
-        }
+        }*/
         builder.setItems(titles.toArray(new String[titles.size()]), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Quiz quiz = quizViewModel.getQuizzes().getValue().get(i);
-                System.out.println("JSON pre "+JsonConverter.toJson(quiz));
-                createGroup(quiz);
+                //Quiz quiz = quizViewModel.getQuizzes().getValue().get(i);
+                //System.out.println("JSON pre "+JsonConverter.toJson(quiz));
+                //createGroup(quiz);
             }
         });
         AlertDialog pickQuizDialog = builder.create();
