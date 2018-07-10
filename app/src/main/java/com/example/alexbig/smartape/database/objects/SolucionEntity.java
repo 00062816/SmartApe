@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "solucion_table")
-public class Solucion {
+public class SolucionEntity {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "_id")
