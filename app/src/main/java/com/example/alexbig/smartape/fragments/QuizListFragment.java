@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.alexbig.smartape.R;
 import com.example.alexbig.smartape.adapters.QuizAdapter;
 import com.example.alexbig.smartape.api.APIRequest;
+import com.example.alexbig.smartape.database.entities.QuizEntity;
 import com.example.alexbig.smartape.database.viewmodels.QuizViewModel;
 import com.example.alexbig.smartape.models.Quiz;
 
@@ -26,11 +27,14 @@ public class QuizListFragment extends Fragment{
     private APIRequest apiRequest;
     private QuizViewModel quizViewModel;
     private List<Quiz> quizList;
+    private List<QuizEntity> quizEntityList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.layout_dashboard, container, false);
-
+        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
+        apiRequest = new APIRequest(getContext());
+        apiRequest.downloadQuizzes(quizViewModel);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_dashboard_allQuizzes);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(container.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -38,13 +42,15 @@ public class QuizListFragment extends Fragment{
         recyclerView.setAdapter(quizAdapter);
         recyclerView.setHasFixedSize(true);
 
-        quizViewModel = ViewModelProviders.of(this).get(QuizViewModel.class);
-        quizViewModel.getQuizzes().observe(this, new Observer<List<Quiz>>() {
-             @Override
-             public void onChanged(@Nullable List<Quiz> quizzes) {
-                 setQuizList(quizzes);
-             }
-         });
+        System.out.println("Hola");
+
+
+        quizViewModel.getAllQuizzes().observe(this, new Observer<List<QuizEntity>>() {
+            @Override
+            public void onChanged(@Nullable List<QuizEntity> quizEntities) {
+                System.out.println(quizEntities);
+            }
+        });
 
         return view;
     }
