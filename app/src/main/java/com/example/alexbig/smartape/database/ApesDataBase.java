@@ -20,7 +20,7 @@ import com.example.alexbig.smartape.database.objects.Usuario;
  * Created by Andres on 4/7/2018.
  */
 
-@Database(entities = {PreguntaEntity.class, Quiz.class, Resuelto.class, Solucion.class, Usuario.class}, version = 1)
+@Database(entities = {PreguntaEntity.class, Quiz.class, Resuelto.class, Solucion.class, Usuario.class}, version = 1,exportSchema = false)
 public abstract class ApesDataBase extends RoomDatabase {
     private static final String DB_NAME = "SmartApes.db";
     private static volatile ApesDataBase instance;
