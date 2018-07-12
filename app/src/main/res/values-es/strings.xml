@@ -86,4 +86,27 @@
     <string name="text_result">Resultados</string>
     <string name="text_correct">Correcto</string>
     <string name="text_grade">Nota</string>
+
+    <string-array name="trending_options">
+        <item>Mes</item>
+        <item>Semana</item>
+        <item>Hoy</item>
+    </string-array>
+
+    <string-array name="quiz_category_options">
+        <item>Matematicas</item>
+        <item>Ciencia</item>
+        <item>Historia</item>
+        <item>Lenguaje</item>
+        <item>Entretenimiento</item>
+        <item>Comida</item>
+        <item>Deportes</item>
+        <item>Tecnologia</item>
+        <item>Otros</item>
+    </string-array>
+
+    <string-array name="question_category_options">
+        <item>Respuesta multiple</item>
+        <item>Verdadero o falso</item>
+    </string-array>
 </resources>
